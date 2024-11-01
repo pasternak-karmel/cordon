@@ -8,7 +8,7 @@ export default defineConfig({
   out: "./drizzle",
   dbCredentials: {
     // url: process.env.DATABASE_URL!,
-    url: "postgres://postgres:moikarmel@localhost:5432/cordon",
+    url: "postgres://postgres:23052005AB@localhost:5432/cordon",
   },
   verbose: true,
   strict: true,

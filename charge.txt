@@ -1,0 +1,101 @@
+1. Gestion des Utilisateurs
+   - Inscription et Connexion : (Google, Facebook, Github ?).
+   - Profils Utilisateurs : informations basiques (nom, email, photo).
+   - Gestion de la Sécurité : réinitialisation de mot de passe, authentification à deux facteurs.
+   - Paramètres de Notification : pour gérer les alertes d’abonnement et de renouvellement ainsi que les promos et baisse ou hausse de prix.
+
+2. Intégration Bancaire
+   - Connexion à la Banque via API Plaid (ou autre) : pour extraire les transactions bancaires, identifier les paiements récurrents et les abonnements.
+   - Analyse des Transactions : catégorisation des abonnements pour permettre l’identification et le suivi.
+   - Mises à Jour Automatiques : synchronisation périodique pour récupérer les informations de paiement récentes.
+
+3. Gestion des Abonnements
+   - Tableau de Bord des Abonnements : vue d’ensemble de tous les abonnements actifs, avec montants, dates de renouvellement, fréquence de facturation.
+   - Alertes de Renouvellement et Échéances : rappels avant chaque échéance d'abonnement, configurables en jours.
+   - Prévisions de Dépenses : prévisions des coûts d'abonnement mensuels et annuels.
+
+4. Fonctionnalités d’Aide à la Gestion des Abonnements
+   - Annulation de l’Abonnement : suggestion de liens directs pour annuler les abonnements, quand applicable.
+   - Recommandations Personnalisées : suggestions pour réduire les coûts (exemple : passage à un forfait moins cher).
+   - Comparaison des Prix : comparaison d'abonnements similaires pour optimiser les dépenses.
+
+5. Reporting et Analyse
+   - Résumé des Dépenses Mensuelles/Annuelles : graphiques et rapports sur les dépenses liées aux abonnements.
+   - Catégorisation des Abonnements : par type (divertissement, services, utilitaires, etc.).
+   - Rapports de Tendance : historique des abonnements, nouveaux abonnements, résiliations, etc.
+
+6. Intégrations et Connecteurs
+   - API d’Intégration : pour intégrer le service avec d’autres applications financières (comme une app de gestion budgétaire).
+   - Exportation des Données : export en CSV ou PDF des informations d'abonnement pour usage personnel ou partage.
+
+7. Fonctionnalités Avancées (Premium)
+   - Gestion des Abonnements Familiaux : possibilité de suivre et de visualiser les abonnements de la famille.
+   - Gestion des Débits Automatiques : suggestions pour désactiver les prélèvements automatiques.
+   - Analyse des Économies : calcul des économies réalisées en résiliant des abonnements inutilisés.
+   - Possibilité d'ajouter plus d'abonnements(par défaut limité à 4? )
+
+8. Sécurité et Confidentialité
+   - Chiffrement des Données : pour toutes les informations utilisateur.
+   - RGPD et Conformité Légale : collecte et stockage des données respectant les lois de protection des données.
+   - Historique et Journalisation : journal des connexions et des modifications de paramètres.
+
+9. Service Client et Assistance
+   - Support Utilisateur : via chat, email ou FAQ pour assistance.
+   - Documentation : guide d’utilisation, questions fréquentes, et explication des intégrations.
+   - Feedback Utilisateur : possibilité de donner un retour sur l'expérience et les fonctionnalités.
+
+10. Administration de l'Application (Interface Admin)
+   - Gestion des Utilisateurs : visualisation, suspension, suppression.
+   - Statistiques d’Utilisation : rapports sur l'activité des utilisateurs et les abonnements suivis.
+   - Paramètres de Facturation : gestion des plans d'abonnement au service lui-même (si votre SaaS est payant).
+
+
+____________________________________________________API_________________________________________________________
+
+
+
+1. Gestion des Utilisateurs
+POST /api/auth/register : Créer un compte utilisateur.
+POST /api/auth/login : Connexion utilisateur.
+POST /api/auth/logout : Déconnexion utilisateur.
+POST /api/auth/forgot-password : Réinitialisation de mot de passe.
+PUT /api/user/profile : Mise à jour des informations du profil utilisateur.
+GET /api/user/profile : Récupérer les informations de profil.
+POST /api/auth/verify-2fa : Vérifier le code d'authentification à deux facteurs (2FA).
+2. Connexion Bancaire et Synchronisation
+POST /api/bank/connect : Connecter un compte bancaire via Plaid (ou autre).
+POST /api/bank/disconnect : Déconnecter un compte bancaire.
+GET /api/bank/status : Vérifier l’état de la connexion bancaire.
+GET /api/bank/sync : Synchroniser les transactions depuis la banque.
+3. Gestion des Abonnements
+GET /api/subscriptions : Récupérer la liste des abonnements de l’utilisateur.
+POST /api/subscriptions : Ajouter un abonnement manuellement.
+GET /api/subscriptions/{id} : Récupérer les détails d’un abonnement spécifique.
+PUT /api/subscriptions/{id} : Mettre à jour les informations d’un abonnement.
+DELETE /api/subscriptions/{id} : Supprimer un abonnement.
+GET /api/subscriptions/renewal-alerts : Récupérer les abonnements avec alertes de renouvellement.
+4. Gestion des Transactions et Analyses
+GET /api/transactions : Récupérer la liste des transactions pour analyse.
+GET /api/transactions/{id} : Récupérer les détails d’une transaction.
+GET /api/transactions/categories : Récupérer les catégories de transactions.
+GET /api/reports/spending : Récupérer le rapport des dépenses par mois.
+GET /api/reports/trends : Récupérer les tendances de dépenses par abonnement.
+5. Alertes et Notifications
+GET /api/notifications : Récupérer la liste des notifications.
+PUT /api/notifications/mark-read : Marquer une notification comme lue.
+PUT /api/notifications/settings : Configurer les préférences de notification.
+6. Abonnements et Optimisation
+POST /api/subscriptions/optimize : Suggérer des abonnements alternatifs ou moins coûteux.
+GET /api/subscriptions/recommendations : Obtenir des recommandations basées sur l’historique des abonnements.
+7. Exportation des Données
+GET /api/export/csv : Exporter les abonnements en CSV.
+GET /api/export/pdf : Exporter les abonnements en PDF.
+8. Fonctionnalités Premium (si applicable)
+POST /api/premium/subscribe : Souscrire au plan premium du SaaS.
+GET /api/premium/status : Vérifier l’état du plan premium.
+POST /api/premium/unsubscribe : Annuler le plan premium.
+9. Administration (Interface Admin)
+GET /api/admin/users : Récupérer la liste des utilisateurs.
+PUT /api/admin/users/{id}/suspend : Suspendre un utilisateur.
+DELETE /api/admin/users/{id} : Supprimer un utilisateur.
+GET /api/admin/analytics : Obtenir les statistiques d’utilisation.
