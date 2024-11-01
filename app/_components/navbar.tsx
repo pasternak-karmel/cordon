@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 const NavbarWelcome = () => {
   return (
     <div className="fixed right-0 left-0 top-0 backdrop-blur-lg z-[100] py-4 w-full flex justify-center">
-      <div className="w-[70%] flex justify-between items-center">
+      <div className="w-[70%] flex justify-between items-center border-b-[1px] ">
         {/* logo */}
         <div>Cordon</div>
         <div>
