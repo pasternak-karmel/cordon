@@ -6,10 +6,8 @@ import { cn } from "@/lib/utils";
 
 export default async function Home() {
   const session = await auth();
-  {
-    /*if (!session) {
+  if (!session) {
     return <div>Not authenticated</div>;
-  }*/
   }
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
