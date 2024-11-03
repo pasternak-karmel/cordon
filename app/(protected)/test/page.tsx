@@ -229,10 +229,6 @@ export default async function Dashboard() {
               paymentDate: "20 August 2024",
               paymentCategory: "Family Plan",
             },
-            {
-              paymentDate: "20 August 2024",
-              paymentCategory: "Family Plan",
-            },
           ]}
         />
       </div>
