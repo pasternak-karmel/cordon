@@ -14,6 +14,7 @@ export default async function Home() {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
       <NavbarWelcome />
+
       <DotPattern className="min-h-screen" />
       <div className="w-[50%] flex flex-col gap-4 items-center justify-center">
         <Button variant={"gooeyLeft"}>Welcome to Cordon</Button>
