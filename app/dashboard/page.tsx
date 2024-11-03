@@ -1,9 +1,9 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import AllTabs from "../_component/all";
-import PersonTabs from "../_component/person";
-import RemoteTabs from "../_component/remote";
 import { Button } from "@/components/ui/button";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
+import PersonTabs from "../(protected)/_component/person";
+import RemoteTabs from "../(protected)/_component/remote";
+import AllTabs from "../(protected)/_component/all";
 export default function Dashboard() {
   return (
     <div>
