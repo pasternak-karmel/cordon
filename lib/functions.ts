@@ -123,12 +123,22 @@ export const getAllAgriments = async (
   }
 };
 
-export const createAgriments = async () => {
+export const createAgriments = async (
+  institution_id: string,
+  max_historical_days: number,
+  access_valid_for_days: number,
+  access_scope: string[]
+) => {
   try {
-    const response = await api.post(`/v2/agreements/enduser/`);
+    const response = await api.post(`/v2/agreements/enduser/`, {
+      institution_id,
+      max_historical_days,
+      access_valid_for_days,
+      access_scope,
+    });
     return response.data;
   } catch (error) {
-    console.error("Error creating agreements:", error);
+    console.error("Error creating agreement:", error);
     throw error;
   }
 };
