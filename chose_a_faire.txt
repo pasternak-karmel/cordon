@@ -1,0 +1,3 @@
+
+1. stocker le token une fois pour toute instead or creating new one 
+Après on crée le composant pour handle les erreurs
