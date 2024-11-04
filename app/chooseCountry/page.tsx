@@ -1,71 +1,17 @@
-"use client";
-import React, { useEffect } from "react";
+import React from "react";
+import Image from "next/image";
+
+import { getAccessToken } from "@/actions/token/token";
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Search, ChevronRight } from "lucide-react";
-import Image from "next/image";
-import { getInstitutions } from "@/lib/function";
-import { getAccessToken } from "@/lib/function";
+import { countries } from "@/constant";
+import { getInstitutions } from "@/actions/banque/userBanque";
 
-export default function Country() {
-  useEffect(() => {
-    getAccessToken();
-  }, []);
-  const countries: {
-    flag: string;
-    name: string;
-    description: string;
-    value: string;
-  }[] = [
-    {
-      flag: "/austria.svg",
-      name: "Austria",
-      description: "Austria's flag",
-      value: "AS",
-    },
-    {
-      flag: "/germany.png",
-      name: "Germany",
-      description: "Germany's flag",
-      value: "AS",
-    },
-    {
-      flag: "/denmark.png",
-      name: "Denmark",
-      description: "Denmark's flag",
-      value: "AS",
-    },
-    {
-      flag: "/finland.png",
-      name: "Finland",
-      description: "Finland's flag",
-      value: "AS",
-    },
-    {
-      flag: "/uk.svg",
-      name: "United Kingdom",
-      description: "United Kingdom's flag",
-      value: "AS",
-    },
-    {
-      flag: "/netherlands.png",
-      name: "Netherlands",
-      description: "Netherlands's flag",
-      value: "AS",
-    },
-    {
-      flag: "/norway.png",
-      name: "Norway",
-      description: "Norway's flag",
-      value: "AS",
-    },
-    {
-      flag: "/sweden.png",
-      name: "Sweden",
-      description: "Sweden's flag",
-      value: "AS",
-    },
-  ];
+export default async function Country() {
+  await getAccessToken();
+
   return (
     <div className="h-screen w-full flex">
       <div className="bg-gray-50 w-[45%] h-full flex justify-center items-center">
@@ -91,8 +37,7 @@ export default function Country() {
                 return (
                   <div
                     onClick={async () => {
-                      const a = await getInstitutions(country.value);
-                      console.log(a);
+                      await getInstitutions(country.value);
                     }}
                     key={i}
                     className="flex flex-row justify-between border rounded-md py-4 px-4 hover:bg-gray-50"
@@ -106,7 +51,6 @@ export default function Country() {
                       />
                       <span>{country.name}</span>
                     </div>
-
                     <ChevronRight />
                   </div>
                 );

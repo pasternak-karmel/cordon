@@ -4,6 +4,8 @@ import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import PersonTabs from "../(protected)/_component/person";
 import RemoteTabs from "../(protected)/_component/remote";
 import AllTabs from "../(protected)/_component/all";
+
+
 export default function Dashboard() {
   return (
     <div>

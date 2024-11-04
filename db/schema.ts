@@ -15,6 +15,16 @@ const pool = postgres(connectionString, { max: 1 });
 
 export const db = drizzle(pool);
 
+export const token = pgTable("token", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  access_token: text("access_token").notNull(),
+  refresh_token: text("refresh_token").notNull(),
+  created_at: timestamp("created_at", { mode: "date" }).defaultNow(),
+  expires_at: integer("expires_at").notNull(),
+});
+
 export const users = pgTable("user", {
   id: text("id")
     .primaryKey()
