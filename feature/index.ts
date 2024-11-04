@@ -1,8 +1,9 @@
-import { url_gocardless } from "@/constant";
 import axios from "axios";
 
-const token =
-  typeof window === "undefined" ? null : localStorage.getItem("access_token");
+import { getAccessToken } from "@/actions/token/token";
+import { url_gocardless } from "@/constant";
+
+const token = await getAccessToken();
 // Create a new axios instance with the base URL and headers
 export const apiAxios = axios.create({
   baseURL: `${url_gocardless}/api`,

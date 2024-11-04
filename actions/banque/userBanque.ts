@@ -2,8 +2,6 @@
 
 import { apiAxios } from "@/feature";
 
-
-
 // accounts
 export const getAccount = async (id: string) => {
   try {
