@@ -1,8 +1,10 @@
+"use cache";
 import { auth } from "@/auth";
 import { Social } from "@/components/social";
 import { Button } from "@/components/ui/button";
 import DotPattern from "@/components/ui/dot-pattern";
 import NavbarWelcome from "./_components/navbar";
+import { getAccessToken } from "@/lib/function";
 
 export default async function Home() {
   const session = await auth();
@@ -11,6 +13,7 @@ export default async function Home() {
     return <div>Not authenticated</div>;
   }*/
   }
+  getAccessToken();
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
       <NavbarWelcome />
