@@ -11,7 +11,7 @@ import {
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 export default async function Dashboard() {
   return (
-    <div className="">
+    <div>
       <h5 className="my-3 text-gray-800 text-xl">Spendings</h5>
 
       <div className="w-full flex flex-row space-x-4">
