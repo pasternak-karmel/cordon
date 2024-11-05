@@ -10,19 +10,12 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-
-interface Institution {
-  id: string;
-  name: string;
-  logo: string;
-}
+import { InstitutionProps } from "@/interface";
 
 export default function InstitutionsSelector({
   institutions,
-  accessToken,
 }: {
-  institutions: Institution[];
-  accessToken: string;
+  institutions: InstitutionProps[];
 }) {
   const [institutionSelected, setSelectedInstitution] = useState<string | null>(
     null
@@ -44,7 +37,6 @@ export default function InstitutionsSelector({
         },
         body: JSON.stringify({
           institutionId: institutionSelected,
-          accessToken,
         }),
       });
 
@@ -74,8 +66,6 @@ export default function InstitutionsSelector({
                   src={institution.logo}
                   alt={institution.name}
                   className="w-6 h-6"
-                  // height={20}
-                  // width={20}
                 />
                 <span>{institution.name}</span>
               </div>

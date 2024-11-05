@@ -1,0 +1,5 @@
+La function getRequisition prends un body or Apiaxios ne prends pas. essaie de voir comment tu vas régler (lors de l'api init-session)
+
+pour les constants country met à jour les value avec les bonnes valeurs
+
+Le fichier dialogProvider lis le commentaire

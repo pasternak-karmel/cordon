@@ -8,6 +8,13 @@
       "when": 1730462914878,
       "tag": "0000_tranquil_talon",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1730758406292,
+      "tag": "0001_quick_kronos",
+      "breakpoints": true
     }
   ]
 }

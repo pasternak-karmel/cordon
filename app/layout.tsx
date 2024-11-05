@@ -3,6 +3,7 @@ import "./globals.css";
 import localFont from "next/font/local";
 
 import { Poppins } from "next/font/google";
+import { Toaster } from "sonner";
 
 const font = Poppins({
   subsets: ["latin"],
@@ -36,6 +37,7 @@ export default function RootLayout({
         className={`${font.className} ${geistMono.variable} antialiased bg-gray-200`}
       >
         {children}
+        <Toaster />
       </body>
     </html>
   );
