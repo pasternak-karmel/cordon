@@ -195,10 +195,10 @@ export const getOneRequisition = async (id: string) => {
 export const createRequisition = async (
   redirect: string,
   institution_id: string,
-  agreement: string,
   reference: string,
-  user_language: string,
-  ssn: string,
+  agreement?: string,
+  user_language?: string,
+  ssn?: string,
   account_selection: boolean = false,
   redirect_immediate: boolean = false
 ) => {
