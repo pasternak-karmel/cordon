@@ -18,11 +18,13 @@ export default function AddCountry() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log("fetching country");
     const fetchInstitutions = async () => {
       setLoading(true);
       try {
         const data = await getInstitutions(country);
         setInstitutions(data);
+        console.log("country fetched");
       } catch (error) {
         console.error("Failed to fetch institutions:", error);
       } finally {
