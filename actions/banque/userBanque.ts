@@ -193,7 +193,7 @@ export const getOneRequisition = async (id: string) => {
 };
 
 export const createRequisition = async (
-  redirect: string,
+  redirect: string = ``,
   institution_id: string,
   reference: string,
   agreement?: string,
@@ -213,6 +213,8 @@ export const createRequisition = async (
       account_selection,
       redirect_immediate,
     });
+    console.log(response.data);
+
     return response.data;
   } catch (error) {
     console.error("Error creating requisition:", error);
