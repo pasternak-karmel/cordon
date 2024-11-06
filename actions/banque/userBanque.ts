@@ -193,7 +193,7 @@ export const getOneRequisition = async (id: string) => {
 };
 
 export const createRequisition = async (
-  redirect: string = ``,
+  redirect: string = `${process.env.SECRET_ID}`,
   institution_id: string,
   reference: string,
   agreement?: string,
@@ -213,11 +213,12 @@ export const createRequisition = async (
       account_selection,
       redirect_immediate,
     });
-    console.log(response.data);
-
     return response.data;
-  } catch (error) {
-    console.error("Error creating requisition:", error);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    if (error.response) {
+      console.error("Error creating requisition:", error.response.data);
+    }
     throw error;
   }
 };

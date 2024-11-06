@@ -8,14 +8,14 @@ import {
   SubscriptionDetailsCard,
 } from "@/app/_components/cards";
 import { createRequisition } from "@/actions/banque/userBanque";
+import { getAccessToken } from "@/actions/token/token";
 
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 export default async function Dashboard() {
-  const response = await createRequisition(
-    `g`,
-    "455555555",
-    "crypto.randomddUUID()"
-  );
+  const accessToken = await getAccessToken();
+  const res = await createRequisition();
+  console.log(res);
+
   return (
     <div>
       <h5 className="my-3 text-gray-800 text-xl">Spendings</h5>

@@ -9,7 +9,6 @@ export const apiAxios = axios.create({
   baseURL: `${url_gocardless}/api`,
   headers: {
     "Content-Type": "application/json",
-    Accept: "application/json",
     Authorization: token ? `Bearer ${token}` : "",
   },
 });
