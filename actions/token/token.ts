@@ -1,9 +1,9 @@
 "use server";
 
-import { eq, desc } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 
-import { TokenData } from "@/interface";
 import { db, token } from "@/db/schema";
+import { TokenData } from "@/interface";
 
 // TOKEN
 export async function getAccessToken() {
@@ -94,7 +94,10 @@ export const refreshToken = async (refreshToken: string) => {
       .update(token)
       .set({
         created_at: new Date(),
-        ...data,
+        access_token: data.access,
+        refresh_token: data.refresh,
+        expires_at: data.access_expires,
+        // ...data,
       })
       .where(eq(token.refresh_token, refreshToken));
 
