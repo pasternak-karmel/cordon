@@ -8,13 +8,14 @@ import {
   SubscriptionDetailsCard,
 } from "@/app/_components/cards";
 import { createRequisition } from "@/actions/banque/userBanque";
-import { getAccessToken } from "@/actions/token/token";
 
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 export default async function Dashboard() {
-  const accessToken = await getAccessToken();
-  const res = await createRequisition();
-  console.log(res);
+  /*const res = await createRequisition(
+    "http://localhost:3000/test",
+    "N26_NTSBDEB1"
+  );
+  console.log(res);*/
 
   return (
     <div>

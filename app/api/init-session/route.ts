@@ -1,17 +1,18 @@
 import { NextResponse } from "next/server";
-// import { createRequisition } from "@/actions/banque/userBanque";
-import { getAccessToken } from "@/actions/token/token";
+import { createRequisition } from "@/actions/banque/userBanque";
+//import { getAccessToken } from "@/actions/token/token";
 
 export async function POST(request: Request) {
   const { institutionId } = await request.json();
-  // const response = await createRequisition(
-  //   `${process.env.NEXT_PUBLIC_APP_URL!}/add-account`,
-  //   institutionId,
-  //   crypto.randomUUID()
-  // );
-  const accessToken = await getAccessToken();
+  const response = await createRequisition(
+    `${process.env.NEXT_PUBLIC_APP_URL}/add-account`,
+    institutionId,
+    crypto.randomUUID()
+  );
+  //const accessToken = await getAccessToken();
 
-  const response = await fetch(
+  {
+    /* const response = await fetch(
     "https://bankaccountdata.gocardless.com/api/v2/requisitions/",
     {
       method: "POST",
@@ -25,7 +26,8 @@ export async function POST(request: Request) {
         reference: crypto.randomUUID(),
       }),
     }
-  );
+  );*/
+  }
 
   if (!response.ok) {
     return NextResponse.json(
@@ -34,6 +36,6 @@ export async function POST(request: Request) {
     );
   }
 
-  const data = await response.json();
-  return NextResponse.json({ link: data.link });
+  //const data = await response.json();
+  return NextResponse.json({ link: response.link });
 }

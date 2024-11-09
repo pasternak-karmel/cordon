@@ -1,6 +1,7 @@
 "use server";
 
 import { apiAxios } from "@/feature";
+import axios from "axios";
 
 // accounts
 export const getAccount = async (id: string) => {
@@ -195,7 +196,7 @@ export const getOneRequisition = async (id: string) => {
 export const createRequisition = async (
   redirect: string = `${process.env.SECRET_ID}`,
   institution_id: string,
-  reference: string,
+  reference?: string,
   agreement?: string,
   user_language?: string,
   ssn?: string,
@@ -214,10 +215,11 @@ export const createRequisition = async (
       redirect_immediate,
     });
     return response.data;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
-    if (error.response) {
-      console.error("Error creating requisition:", error.response.data);
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Error creating requisition:", error.response?.data);
+    } else {
+      console.error("Unknown error:", error);
     }
     throw error;
   }
