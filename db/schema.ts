@@ -1,16 +1,18 @@
 import {
   boolean,
-  timestamp,
-  pgTable,
-  text,
-  primaryKey,
+  decimal,
+  index,
   integer,
+  pgTable,
+  primaryKey,
+  text,
+  timestamp,
 } from "drizzle-orm/pg-core";
-import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
 import type { AdapterAccountType } from "next-auth/adapters";
+import postgres from "postgres";
 
-const connectionString = "postgres://postgres:23052005AB@localhost:5432/cordon";
+const connectionString = "postgres://postgres:moikarmel@localhost:5432/cordon";
 const pool = postgres(connectionString, { max: 1 });
 
 export const db = drizzle(pool);
@@ -99,5 +101,36 @@ export const authenticators = pgTable(
     compositePK: primaryKey({
       columns: [authenticator.userId, authenticator.credentialID],
     }),
+  })
+);
+
+export const bankAccounts = pgTable(
+  "bank_accounts",
+  {
+    id: text("id")
+      .primaryKey()
+      .$defaultFn(() => crypto.randomUUID()),
+    userId: text("userId")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    requisitionId: text("requisitionId"),
+    institutionId: text("institutionId"),
+    institutionName: text("institutionName"),
+    iban: text("iban"),
+    accountId: text("accountId"),
+    accountName: text("accountName"),
+    balanceAmount: decimal("balanceAmount", { precision: 10, scale: 2 }),
+    balanceCurrency: text("balanceCurrency"),
+    ownerName: text("ownerName"),
+    linkStatus: text("linkStatus").notNull().default("active"),
+    lastSyncAt: timestamp("lastSyncAt", { mode: "date" }),
+    createdAt: timestamp("createdAt", { mode: "date" }).defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt", { mode: "date" }).defaultNow().notNull(),
+  },
+  (bankAccount) => ({
+    userIdIdx: index("bank_accounts_user_id_idx").on(bankAccount.userId),
+    requisitionIdIdx: index("bank_accounts_requisition_id_idx").on(
+      bankAccount.requisitionId
+    ),
   })
 );
