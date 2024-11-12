@@ -194,7 +194,7 @@ export const getOneRequisition = async (id: string) => {
 };
 
 export const createRequisition = async (
-  redirect: string = `${process.env.SECRET_ID}`,
+  redirect: string,
   institution_id: string,
   reference?: string,
   agreement?: string,
@@ -207,8 +207,8 @@ export const createRequisition = async (
     const response = await apiAxios.post("/v2/requisitions/", {
       redirect,
       institution_id,
-      agreement,
       reference,
+      agreement,
       user_language,
       ssn,
       account_selection,

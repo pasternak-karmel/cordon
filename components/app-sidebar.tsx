@@ -35,7 +35,7 @@ const data = {
   navMain: [
     {
       title: "Home",
-      url: "#",
+      url: "/home",
       icon: LayoutGrid,
       isActive: true,
       items: [],
@@ -54,7 +54,7 @@ const data = {
     },
     {
       title: "My Cards",
-      url: "#",
+      url: "/my-cards",
       icon: CreditCard,
       items: [],
     },
@@ -87,7 +87,7 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar variant="inset" {...props}>
+    <Sidebar variant="floating" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>

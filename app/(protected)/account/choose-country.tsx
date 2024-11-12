@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
 
 import { useRouter } from "next/navigation";
@@ -9,7 +8,8 @@ import { countries } from "@/constant";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Search, ChevronRight } from "lucide-react";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { ChevronRight, Search } from "lucide-react";
 
 const ChooseCountry = () => {
   const router = useRouter();
@@ -31,7 +31,7 @@ const ChooseCountry = () => {
           placeholder="Search..."
           className="h-12 pl-9 text-lg"
         />
-        <div className="grid grid-cols-2 gap-3 mt-4">
+        <ScrollArea className="grid grid-cols-2 gap-3 mt-4 w-full h-[400px] bg-red-500">
           {countries.map((country, i) => {
             return (
               <div
@@ -52,7 +52,7 @@ const ChooseCountry = () => {
               </div>
             );
           })}
-        </div>
+        </ScrollArea>
       </div>
     </div>
   );

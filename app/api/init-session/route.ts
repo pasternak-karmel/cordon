@@ -1,11 +1,11 @@
-import { NextResponse } from "next/server";
 import { createRequisition } from "@/actions/banque/userBanque";
+import { NextResponse } from "next/server";
 //import { getAccessToken } from "@/actions/token/token";
 
 export async function POST(request: Request) {
   const { institutionId } = await request.json();
   const response = await createRequisition(
-    `${process.env.NEXT_PUBLIC_APP_URL}/add-account`,
+    `${process.env.NEXT_PUBLIC_APP_URL!}/add-account`,
     institutionId,
     crypto.randomUUID()
   );
