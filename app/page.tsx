@@ -3,12 +3,11 @@ import { Social } from "@/components/social";
 import { Button } from "@/components/ui/button";
 import DotPattern from "@/components/ui/dot-pattern";
 import NavbarWelcome from "./_components/navbar";
-import { getAccessToken } from "@/actions/token/token";
 
 export default async function Home() {
   const session = await auth();
 
-  await getAccessToken();
+  //await getAccessToken();
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
