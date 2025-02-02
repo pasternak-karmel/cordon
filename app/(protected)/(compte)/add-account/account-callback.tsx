@@ -6,7 +6,7 @@ const AccountCallback = async ({ callback }: { callback: string }) => {
     if (!id) {
       throw new Error("Requisition ID not found");
     }
-    await saveRequisition(callback, id);
+    await saveRequisition(id, callback);
     localStorage.removeItem("requisitionId");
   } catch (error) {
     console.log(`an error occured ${error}`);

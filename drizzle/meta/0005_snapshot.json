@@ -1,6 +1,6 @@
 {
-  "id": "0d99b8c5-6dc9-4879-9d98-f6d38445a414",
-  "prevId": "70d2a7ef-a2f7-4dbe-8297-13289f068183",
+  "id": "df58aa6c-fb6b-4c23-9d82-f9b2d3e05941",
+  "prevId": "0d99b8c5-6dc9-4879-9d98-f6d38445a414",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -565,7 +565,15 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
+      "uniqueConstraints": {
+        "subscriptions_userId_unique": {
+          "name": "subscriptions_userId_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "userId"
+          ]
+        }
+      },
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false

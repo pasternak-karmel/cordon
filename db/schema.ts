@@ -134,3 +134,58 @@ export const RequisitionTable = pgTable(
     ),
   })
 );
+
+export const prices = pgTable("prices", {
+  id: text("id").primaryKey().$defaultFn(generate),
+  name: text("name"),
+  price: integer("price").notNull(),
+  currency: text("currency").notNull(),
+});
+
+export enum SubscriptionStatus {
+  ACTIVE = "ACTIVE",
+  INACTIVE = "INACTIVE",
+  CANCELLED = "CANCELLED",
+  EXPIRED = "EXPIRED",
+  PAUSED = "PAUSED",
+  PENDING = "PENDING",
+  REJECTED = "REJECTED",
+  COMPLETED = "COMPLETED",
+  INCOMPLETE = "INCOMPLETE",
+  TRIALING = "TRIALING",
+  UNPAID = "UNPAID",
+  INCOMPLETE_EXPIRED = "INCOMPLETE_EXPIRED",
+  PAST_DUE = "PAST_DUE",
+}
+
+export const subscriptions = pgTable(
+  "subscriptions",
+  {
+    id: text("id").primaryKey().$defaultFn(generate),
+    userId: text("userId")
+      .notNull()
+      .unique()
+      .references(() => users.id),
+    type: text("type").notNull(),
+    status: text("status").notNull().default(SubscriptionStatus.ACTIVE),
+    metadata: jsonb("metadata"),
+    cancel_at_period_end: boolean("cancel_at_period_end"),
+    created: timestamp("created", { mode: "date" }).notNull().defaultNow(),
+    current_period_start: timestamp("current_period_start", { mode: "date" })
+      .notNull()
+      .defaultNow(),
+    current_period_end: timestamp("current_period_end", { mode: "date" })
+      .notNull()
+      .defaultNow(),
+    // .check(sql`current_period_end > current_period_start`),
+    ended_at: timestamp("ended_at", { mode: "date" }),
+    canceled_at: timestamp("canceled_at", { mode: "date" }),
+    trial_start: timestamp("trial_start", { mode: "date" }),
+    trial_end: timestamp("trial_end", { mode: "date" }),
+    cancel_at: timestamp("cancel_at", { mode: "date" }),
+  },
+  (subscriptionTable) => ({
+    userIdIdx: index("subscriptions_user_id_idx").on(subscriptionTable.userId),
+    statusIdx: index("status_idx").on(subscriptionTable.status),
+  })
+);

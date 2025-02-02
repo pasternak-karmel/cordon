@@ -23,14 +23,14 @@ export function ShowError(message: string) {
 }
 
 //make this try again work later
-export function ShowDestructive(message: string | null) {
+export function ShowDestructive() {
   // again: () => {}();
   const { toast } = useToast();
 
   return toast({
     variant: "destructive",
     title: "Uh oh! Something went wrong.",
-    description: message ? message : "There was a problem with your request.",
+    description: "There was a problem with your request.",
     action: (
       <ToastAction altText="Try again" onClick={() => {}}>
         Try again
