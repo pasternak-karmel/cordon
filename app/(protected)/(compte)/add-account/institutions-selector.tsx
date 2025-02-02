@@ -1,5 +1,6 @@
 "use client";
 
+import { canAddAccount } from "@/actions/admin";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -9,6 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { InstitutionProps } from "@/interface";
+import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -21,6 +23,10 @@ export default function InstitutionsSelector({
     null
   );
   const router = useRouter();
+  const { data: canAdd, isLoading } = useQuery({
+    queryKey: ["canAddAccount"],
+    queryFn: canAddAccount,
+  });
 
   const handleInstitutionSelect = (value: string) => {
     setSelectedInstitution(value);
@@ -83,7 +89,7 @@ export default function InstitutionsSelector({
       </Select>
       <Button
         onClick={handleLinkAccount}
-        disabled={!institutionSelected}
+        disabled={!institutionSelected || !canAdd || isLoading}
         className="w-full"
       >
         Link your Account

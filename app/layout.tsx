@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import localFont from "next/font/local";
+import "./globals.css";
 
+import { QueryProviders } from "@/provider/query-providers";
 import { Poppins } from "next/font/google";
 import { Toaster } from "sonner";
 
@@ -36,8 +37,10 @@ export default function RootLayout({
       <body
         className={`${font.className} ${geistMono.variable} antialiased bg-gray-200`}
       >
-        {children}
-        <Toaster />
+        <QueryProviders>
+          {children}
+          <Toaster />
+        </QueryProviders>
       </body>
     </html>
   );

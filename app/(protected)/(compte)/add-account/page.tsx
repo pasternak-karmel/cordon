@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { getInstitutions } from "@/actions/banque/userBanque";
 import InstitutionsSelector from "./institutions-selector";
 
-import { ShowDestructive } from "@/components/sonner-component";
+import ErrorDisplay from "@/components/error-display";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TextShimmer } from "@/components/ui/text-shimmer";
 import AccountCallback from "./account-callback";
@@ -37,7 +37,8 @@ export default function AddCountry() {
   }, [country]);
 
   if (error !== null) {
-    return ShowDestructive(error);
+    return ErrorDisplay({ error });
+    // return ShowDestructive();
   } else {
     if (ref) return <AccountCallback callback={ref} />;
   }
@@ -50,7 +51,7 @@ export default function AddCountry() {
         </CardHeader>
         <CardContent>
           {loading ? (
-            <TextShimmer className="font-mono text-sm" >
+            <TextShimmer className="font-mono text-sm">
               Getting institutions available in your country...
             </TextShimmer>
           ) : (
