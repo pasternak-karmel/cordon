@@ -1,5 +1,7 @@
 import { CreditCardComponent } from "@/app/(protected)/my-cards/components/creditCardComponent";
 import { ProfileCard } from "@/app/(protected)/my-cards/components/profileCard";
+
+// rename le nom de la page padre
 export default function page() {
   return (
     <div className="flex flex-row w-full space-x-8">

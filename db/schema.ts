@@ -1,26 +1,30 @@
 import {
   boolean,
-  decimal,
   index,
   integer,
+  jsonb,
   pgTable,
   primaryKey,
   text,
   timestamp,
+  varchar,
 } from "drizzle-orm/pg-core";
 import { drizzle } from "drizzle-orm/postgres-js";
 import type { AdapterAccountType } from "next-auth/adapters";
 import postgres from "postgres";
+// DATABASE_URL=postgres://postgres:moikarmel@127.0.0.1:5432/cordon
 
-const connectionString = "postgres://postgres:23052005AB@localhost:5432/cordon";
+const connectionString = "postgres://postgres:moikarmel@localhost:5432/cordon";
 const pool = postgres(connectionString, { max: 1 });
 
 export const db = drizzle(pool);
 
+function generate() {
+  return crypto.randomUUID();
+}
+
 export const token = pgTable("token", {
-  id: text("id")
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+  id: text("id").primaryKey().$defaultFn(generate),
   access_token: text("access_token").notNull(),
   refresh_token: text("refresh_token").notNull(),
   created_at: timestamp("created_at", { mode: "date" }).defaultNow(),
@@ -28,9 +32,7 @@ export const token = pgTable("token", {
 });
 
 export const users = pgTable("user", {
-  id: text("id")
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+  id: text("id").primaryKey().$defaultFn(generate),
   name: text("name"),
   email: text("email").unique(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
@@ -104,33 +106,30 @@ export const authenticators = pgTable(
   })
 );
 
-export const bankAccounts = pgTable(
-  "bank_accounts",
+export const RequisitionTable = pgTable(
+  "requisition_table",
   {
-    id: text("id")
-      .primaryKey()
-      .$defaultFn(() => crypto.randomUUID()),
+    id: text("id").primaryKey().$defaultFn(generate),
     userId: text("userId")
       .notNull()
-      .references(() => users.id, { onDelete: "cascade" }),
-    requisitionId: text("requisitionId"),
-    institutionId: text("institutionId"),
-    institutionName: text("institutionName"),
-    iban: text("iban"),
-    accountId: text("accountId"),
-    accountName: text("accountName"),
-    balanceAmount: decimal("balanceAmount", { precision: 10, scale: 2 }),
-    balanceCurrency: text("balanceCurrency"),
-    ownerName: text("ownerName"),
+      .references(() => users.id),
+    requisitionId: text("requisitionId").notNull(),
+    status_short: text("status_short").notNull(),
+    status_long: text("status_long").notNull(),
+    status_description: text("status_description").notNull(),
+    agreement: text("agreement").notNull(),
+    accounts: jsonb("accounts").default([]),
+    reference: varchar("reference", { length: 50 }).notNull(),
+    user_language: varchar("user_language", { length: 2 }).notNull(),
     linkStatus: text("linkStatus").notNull().default("active"),
     lastSyncAt: timestamp("lastSyncAt", { mode: "date" }),
     createdAt: timestamp("createdAt", { mode: "date" }).defaultNow().notNull(),
     updatedAt: timestamp("updatedAt", { mode: "date" }).defaultNow().notNull(),
   },
-  (bankAccount) => ({
-    userIdIdx: index("bank_accounts_user_id_idx").on(bankAccount.userId),
+  (requisitionTable) => ({
+    userIdIdx: index("bank_accounts_user_id_idx").on(requisitionTable.userId),
     requisitionIdIdx: index("bank_accounts_requisition_id_idx").on(
-      bankAccount.requisitionId
+      requisitionTable.requisitionId
     ),
   })
 );

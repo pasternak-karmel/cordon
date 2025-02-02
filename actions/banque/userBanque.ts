@@ -30,7 +30,7 @@ export const getAccountDetails = async (id: string) => {
     return response.data;
   } catch (error) {
     console.error("Error fetching account details:", error);
-    throw error;
+    throw new Error(`Failed to fetch account details: ${error} ${error}`);
   }
 };
 
@@ -185,11 +185,22 @@ export const getRequisitions = async (
 
 export const getOneRequisition = async (id: string) => {
   try {
+    console.log(`Fetching requisition with ID: ${id}`);
     const response = await apiAxios.get(`/v2/requisitions/${id}/`);
+    console.log("Requisition fetch successful");
     return response.data;
   } catch (error) {
-    console.error("Error fetching one requisition:", error);
-    throw error;
+    console.error("Error fetching requisition:", error);
+    // if (error.response) {
+    //   console.error("Response data:", error.response.data);
+    //   console.error("Response status:", error.response.status);
+    //   console.error("Response headers:", error.response.headers);
+    // } else if (error.request) {
+    //   console.error("No response received:", error.request);
+    // } else {
+    //   console.error("Error setting up request:", error.message);
+    // }
+    throw new Error(`Failed to fetch requisition: ${error} `);
   }
 };
 
@@ -234,3 +245,22 @@ export const deleteRequisition = async (id: string) => {
     throw error;
   }
 };
+
+export async function getAccountInfo(requisitionId: string) {
+  try {
+    const requisitionData = await getOneRequisition(requisitionId);
+
+    if (!requisitionData.accounts || requisitionData.accounts.length === 0) {
+      throw new Error("No accounts found in the requisition");
+    }
+
+    const accountId = requisitionData.accounts[0];
+    // const accountId = "4972f160-e90e-4f92-9ce2-7b18457eea17";
+    const accountDetails = await getAccountDetails(accountId);
+
+    return accountDetails;
+  } catch (error) {
+    console.error("Error in getAccountInfo:", error);
+    throw error;
+  }
+}

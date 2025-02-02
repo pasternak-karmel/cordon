@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -8,9 +8,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 import { InstitutionProps } from "@/interface";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function InstitutionsSelector({
   institutions,
@@ -30,7 +30,7 @@ export default function InstitutionsSelector({
     if (!institutionSelected) return;
 
     try {
-      const response = await fetch("/api/init-session", {
+      const response = await fetch("/api/user/init-session", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,6 +45,14 @@ export default function InstitutionsSelector({
       }
 
       const data = await response.json();
+
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      // @brunel : save requisitionId in the session (pas la session qui persiste unh)
+      localStorage.setItem("requisitionId", data.id);
+
       router.push(data.link);
     } catch (error) {
       console.error("Error initializing session:", error);

@@ -1,3 +1,4 @@
+import { CreditCardProps } from "@/interface";
 import { CreditCard, Settings } from "lucide-react";
 import Image from "next/image";
 
@@ -7,13 +8,7 @@ export function CreditCardComponent({
   status,
   cardNumber,
   bankImage,
-}: {
-  bankName: string;
-  cardNumber: number;
-  bankImage: string;
-  amount: number;
-  status: string;
-}) {
+}: CreditCardProps) {
   return (
     <div className="py-3 w-full bg-[#ffffff52] shadow-lg rounded-lg ">
       <div className="px-3 flex justify-between pb-3 border-b border-gray-300">

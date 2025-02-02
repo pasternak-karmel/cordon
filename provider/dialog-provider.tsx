@@ -1,4 +1,4 @@
-import ChooseCountry from "@/app/(protected)/account/choose-country";
+import ChooseCountry from "@/app/(protected)/(compte)/account/choose-country";
 
 import { ProviderProps } from "@/interface";
 
