@@ -7,7 +7,6 @@ export const calculateSpendings = async (
   allTransac: transactionProps[]
 ): Promise<number | null> => {
   try {
-
     if (!allTransac || allTransac.length === 0) {
       console.log("Aucune transaction trouvée.");
       return null;

@@ -1,10 +1,10 @@
 Première phase
 
 1. Inscription et connexion (fait) remaining extend session
-2. Integrate a parserelle for getting user auth banq  (brunel boss)
-3. make a first auth on sandbox connecting user data (karmel)
-4. make the api which will know based on result what're the subscriptions for the user  (maybe use gemini or mistrai no time to codé sa)
-5. Determine the end of the subscriptions and alert the user
+2. Integrate a parserelle for getting user auth banq  (brunel boss) (fait)
+3. make a first auth on sandbox connecting user data (karmel) (fait)
+4. make the api which will know based on result what're the subscriptions for the user  (maybe use gemini or mistrai no time to codé sa) (fait)
+5. Determine the end of the subscriptions and alert the user (fait, alert not yet)
 6. start using webhooks to avoid infinite api call and saving data to the db
 
 
