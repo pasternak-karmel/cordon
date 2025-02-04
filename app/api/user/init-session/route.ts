@@ -1,6 +1,7 @@
 import { canAddAccount } from "@/actions/admin";
 import { createRequisition } from "@/actions/banque/userBanque";
 import { auth } from "@/auth";
+import { getURL } from "@/utils/helper";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -19,9 +20,10 @@ export async function POST(request: Request) {
   //   process.env.NEXT_PUBLIC_APP_URL!
   // ).toString();
 
+  const callback = getURL("/add-account");
   const response = await createRequisition(
-    // callbackUrl,
-    `${process.env.NEXT_PUBLIC_APP_URL!}/add-account`,
+    callback,
+    // `${process.env.NEXT_PUBLIC_APP_URL!}/add-account`,
     institutionId,
     session.user.id
   );

@@ -50,6 +50,7 @@ export default async function Dashboard() {
                     endingDate={"28 Aug 2023"}
                     remainingDays={12}
                     subscriptionPrice={145}
+                    // on na pas image depuis l'api
                     imageUrl="/netflix.jpg"
                   />
                 </div>

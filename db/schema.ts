@@ -106,6 +106,8 @@ export const authenticators = pgTable(
   })
 );
 
+
+
 export const RequisitionTable = pgTable(
   "requisition_table",
   {
@@ -125,6 +127,7 @@ export const RequisitionTable = pgTable(
     lastSyncAt: timestamp("lastSyncAt", { mode: "date" }),
     createdAt: timestamp("createdAt", { mode: "date" }).defaultNow().notNull(),
     updatedAt: timestamp("updatedAt", { mode: "date" }).defaultNow().notNull(),
+    status: text("status").notNull().default("ACTIVE"),
   },
   (requisitionTable) => ({
     userIdIdx: index("bank_accounts_user_id_idx").on(requisitionTable.userId),
@@ -163,7 +166,7 @@ export const subscriptions = pgTable(
     id: text("id").primaryKey().$defaultFn(generate),
     userId: text("userId")
       .notNull()
-      .unique()
+      // .unique()
       .references(() => users.id),
     type: text("type").notNull(),
     status: text("status").notNull().default(SubscriptionStatus.ACTIVE),
@@ -182,6 +185,7 @@ export const subscriptions = pgTable(
     trial_start: timestamp("trial_start", { mode: "date" }),
     trial_end: timestamp("trial_end", { mode: "date" }),
     cancel_at: timestamp("cancel_at", { mode: "date" }),
+
   },
   (subscriptionTable) => ({
     userIdIdx: index("subscriptions_user_id_idx").on(subscriptionTable.userId),

@@ -1,14 +1,13 @@
 "use server";
 
-import { auth } from "@/auth";
-import { getUserByEmail, getUserById } from "@/data/account";
+import { getUser, getUserById } from "@/data/account";
 import {
   db,
   RequisitionTable,
   subscriptions,
   SubscriptionStatus,
 } from "@/db/schema";
-import { count, eq } from "drizzle-orm";
+import { and, count, eq } from "drizzle-orm";
 import { cache } from "react";
 
 const manageSubscriptionStatusChange = async (
@@ -25,14 +24,9 @@ const manageSubscriptionStatusChange = async (
 };
 
 const canAddAccount = cache(async (): Promise<boolean> => {
-  const session = await auth();
-  if (!session || !session.user || !session.user.email) return false;
+  const id = await getUser();
 
-  const user = await getUserByEmail(session.user.email);
-
-  if (!user) return false;
-
-  const id = user.id;
+  if (!id) return false;
 
   const requisitionCountResult = await db
     .select({ count: count() })
@@ -61,6 +55,59 @@ const canAddAccount = cache(async (): Promise<boolean> => {
   return true;
 });
 
-export { canAddAccount, manageSubscriptionStatusChange };
+const ManageAccount = cache(async (): Promise<boolean> => {
+  // je vérifie si son abonnement a été résilié et si oui desactiver tout le reste sauf les trois premiers
+  const id = await getUser();
+
+  if (!id) return false;
+
+  const pastActiveSubscriptions = await db
+    .select()
+    .from(subscriptions)
+    .where(
+      and(
+        eq(subscriptions.userId, id),
+        eq(subscriptions.status, SubscriptionStatus.ACTIVE)
+      )
+    )
+    .execute();
+  // 2. Vérifier si l'abonnement actuel n'est pas actif
+  const currentSubscription = await db
+    .select()
+    .from(subscriptions)
+    .where(
+      and(
+        eq(subscriptions.userId, id),
+        eq(subscriptions.status, SubscriptionStatus.INACTIVE) // Ou tout autre statut non actif
+      )
+    )
+    .execute();
+
+  // Si l'utilisateur a déjà eu un abonnement actif mais n'en a plus actuellement
+  if (pastActiveSubscriptions.length > 0 && currentSubscription.length === 0) {
+    // 3. Récupérer toutes les requêtes de l'utilisateur
+    const allRequisitions = await db
+      .select()
+      .from(RequisitionTable)
+      .where(eq(RequisitionTable.userId, id))
+      .orderBy(RequisitionTable.createdAt)
+      .execute();
+
+    // 4. Désactiver toutes les requêtes sauf les trois premières
+    for (let i = 3; i < allRequisitions.length; i++) {
+      await db
+        .update(RequisitionTable)
+        .set({ status: "INACTIVE" })
+        .where(eq(RequisitionTable.id, allRequisitions[i].id))
+        .execute();
+    }
+
+    return false;
+  } else {
+    return true;
+  }
+});
+
+export { canAddAccount, ManageAccount, manageSubscriptionStatusChange };
 
 // .where(eq(RequisitionTable.linkStatus, "active")).where(eq(RequisitionTable.status_short, "ACTIVE"))
