@@ -38,7 +38,7 @@ export default async function Dashboard() {
       <div className="">
         <h2 className="my-3 text-gray-800 text-xl">Next Payments</h2>
 
-        <ScrollArea className="-ml-1 whitespace-nowrap">
+        <ScrollArea className="whitespace-nowrap">
           <div className="flex flex-row flex-wrap gap-4">
             {Array.from({ length: 5 }).map((_, index) => (
               <div key={index} className="md:basis-1/2 lg:basis-[25%]">
@@ -61,154 +61,25 @@ export default async function Dashboard() {
           <ScrollBar orientation="horizontal" />
         </ScrollArea>
       </div>
-      <div className=" flex flex-row space-x-8 flex-wrap mt-4 h-[200px]">
+      <div className=" flex flex-row gap-4 flex-wrap mt-4 h-[200px]">
         <div>
           <SubscriptionsRecommandations />
         </div>
-        <div className="h-full flex flex-col justify-between gap-3 bg-white p-3 rounded-md shadow-md">
+        <div className="h-full flex flex-col justify-between gap-3 bg-white p-3 rounded-md shadow-md w-[350px]">
           <h3>Recent Subscriptions</h3>
           <ScrollArea className="h-[150px]">
             <div className="flex flex-col gap-3">
-              <RecentSubscriptions
+              {[1, 2, 3, 4].map((_, index) => (
+                <RecentSubscriptions
+                  key={index}
                 title="Netflix"
                 SubscriptionImage="/netflix.jpg"
                 endingDate="20 August 2024"
                 subscriptionPrice={120}
                 subscriptionCategory="Yearly"
-              />
-              <RecentSubscriptions
-                title="Netflix"
-                SubscriptionImage="/netflix.jpg"
-                endingDate="20 August 2024"
-                subscriptionPrice={120}
-                subscriptionCategory="Yearly"
-              />
-              <RecentSubscriptions
-                title="Netflix"
-                SubscriptionImage="/netflix.jpg"
-                endingDate="20 August 2024"
-                subscriptionPrice={120}
-                subscriptionCategory="Yearly"
-              />
-              <RecentSubscriptions
-                title="Netflix"
-                SubscriptionImage="/netflix.jpg"
-                endingDate="20 August 2024"
-                subscriptionPrice={120}
-                subscriptionCategory="Yearly"
-              />
-              <RecentSubscriptions
-                title="Netflix"
-                SubscriptionImage="/netflix.jpg"
-                endingDate="20 August 2024"
-                subscriptionPrice={120}
-                subscriptionCategory="Yearly"
-              />
-              <RecentSubscriptions
-                title="Netflix"
-                SubscriptionImage="/netflix.jpg"
-                endingDate="20 August 2024"
-                subscriptionPrice={120}
-                subscriptionCategory="Yearly"
-              />
-              <RecentSubscriptions
-                title="Netflix"
-                SubscriptionImage="/netflix.jpg"
-                endingDate="20 August 2024"
-                subscriptionPrice={120}
-                subscriptionCategory="Yearly"
-              />
-              <RecentSubscriptions
-                title="Netflix"
-                SubscriptionImage="/netflix.jpg"
-                endingDate="20 August 2024"
-                subscriptionPrice={120}
-                subscriptionCategory="Yearly"
-              />
-              <RecentSubscriptions
-                title="Netflix"
-                SubscriptionImage="/netflix.jpg"
-                endingDate="20 August 2024"
-                subscriptionPrice={120}
-                subscriptionCategory="Yearly"
-              />
-              <RecentSubscriptions
-                title="Netflix"
-                SubscriptionImage="/netflix.jpg"
-                endingDate="20 August 2024"
-                subscriptionPrice={120}
-                subscriptionCategory="Yearly"
-              />
-              <RecentSubscriptions
-                title="Netflix"
-                SubscriptionImage="/netflix.jpg"
-                endingDate="20 August 2024"
-                subscriptionPrice={120}
-                subscriptionCategory="Yearly"
-              />
-              <RecentSubscriptions
-                title="Netflix"
-                SubscriptionImage="/netflix.jpg"
-                endingDate="20 August 2024"
-                subscriptionPrice={120}
-                subscriptionCategory="Yearly"
-              />
-              <RecentSubscriptions
-                title="Netflix"
-                SubscriptionImage="/netflix.jpg"
-                endingDate="20 August 2024"
-                subscriptionPrice={120}
-                subscriptionCategory="Yearly"
-              />
-              <RecentSubscriptions
-                title="Netflix"
-                SubscriptionImage="/netflix.jpg"
-                endingDate="20 August 2024"
-                subscriptionPrice={120}
-                subscriptionCategory="Yearly"
-              />
-              <RecentSubscriptions
-                title="Netflix"
-                SubscriptionImage="/netflix.jpg"
-                endingDate="20 August 2024"
-                subscriptionPrice={120}
-                subscriptionCategory="Yearly"
-              />
-              <RecentSubscriptions
-                title="Netflix"
-                SubscriptionImage="/netflix.jpg"
-                endingDate="20 August 2024"
-                subscriptionPrice={120}
-                subscriptionCategory="Yearly"
-              />
-              <RecentSubscriptions
-                title="Netflix"
-                SubscriptionImage="/netflix.jpg"
-                endingDate="20 August 2024"
-                subscriptionPrice={120}
-                subscriptionCategory="Yearly"
-              />
-              <RecentSubscriptions
-                title="Netflix"
-                SubscriptionImage="/netflix.jpg"
-                endingDate="20 August 2024"
-                subscriptionPrice={120}
-                subscriptionCategory="Yearly"
-              />
-              <RecentSubscriptions
-                title="Netflix"
-                SubscriptionImage="/netflix.jpg"
-                endingDate="20 August 2024"
-                subscriptionPrice={120}
-                subscriptionCategory="Yearly"
-              />
-              <RecentSubscriptions
-                title="Netflix"
-                SubscriptionImage="/netflix.jpg"
-                endingDate="20 August 2024"
-                subscriptionPrice={120}
-                subscriptionCategory="Yearly"
-              />
+              />)
+                
+              )}
             </div>
           </ScrollArea>
         </div>
