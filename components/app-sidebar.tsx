@@ -53,8 +53,8 @@ const data = {
       items: [],
     },
     {
-      title: "My Cards",
-      url: "/my-cards",
+      title: "Cards",
+      url: "/cards",
       icon: CreditCard,
       items: [],
     },
