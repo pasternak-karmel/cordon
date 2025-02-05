@@ -17,10 +17,10 @@ export default async function Dashboard() {
   console.log(res);*/
 
   return (
-    <div>
+    <div className="px-6 pt-8">
       <h5 className="my-3 text-gray-800 text-xl">Spendings</h5>
 
-      <div className="w-full flex flex-row space-x-4">
+      <div className="w-full flex flex-row gap-4">
         <div className="w-[450px] h-full">
           <BarChartCard />
         </div>
@@ -35,11 +35,11 @@ export default async function Dashboard() {
           </div>
         </div>
       </div>
-      <div className="w-[95vw]">
+      <div className="">
         <h2 className="my-3 text-gray-800 text-xl">Next Payments</h2>
 
         <ScrollArea className="-ml-1 whitespace-nowrap">
-          <div className="flex flex-row space-x-4">
+          <div className="flex flex-row flex-wrap gap-4">
             {Array.from({ length: 5 }).map((_, index) => (
               <div key={index} className="md:basis-1/2 lg:basis-[25%]">
                 <div className="py-2">
@@ -50,6 +50,7 @@ export default async function Dashboard() {
                     endingDate={"28 Aug 2023"}
                     remainingDays={12}
                     subscriptionPrice={145}
+                    // on na pas image depuis l'api
                     imageUrl="/netflix.jpg"
                   />
                 </div>
@@ -64,10 +65,10 @@ export default async function Dashboard() {
         <div>
           <SubscriptionsRecommandations />
         </div>
-        <div className="h-full flex flex-col justify-between space-y-3">
+        <div className="h-full flex flex-col justify-between gap-3 bg-white p-3 rounded-md shadow-md">
           <h3>Recent Subscriptions</h3>
           <ScrollArea className="h-[150px]">
-            <div className="space-y-3">
+            <div className="flex flex-col gap-3">
               <RecentSubscriptions
                 title="Netflix"
                 SubscriptionImage="/netflix.jpg"

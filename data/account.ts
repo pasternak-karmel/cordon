@@ -1,5 +1,6 @@
 import { eq } from "drizzle-orm";
 
+import { auth } from "@/auth";
 import { db, users } from "@/db/schema";
 
 export const getUserByEmail = async (email: string) => {
@@ -24,4 +25,15 @@ export const getUserById = async (id: string) => {
   } catch {
     return null;
   }
+};
+
+export const getUser = async () => {
+  const session = await auth();
+  if (!session || !session.user || !session.user.email) return null;
+
+  const user = await getUserByEmail(session.user.email);
+
+  if (!user) return null;
+
+  return user.id;
 };

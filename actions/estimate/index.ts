@@ -1,7 +1,27 @@
 "use server";
 
+import { transactionProps } from "@/interface";
+
 // calculer montant total entrain d'être dépensé
-export const calculateSpendings = async () => {};
+export const calculateSpendings = async (
+  allTransac: transactionProps[]
+): Promise<number | null> => {
+  try {
+    if (!allTransac || allTransac.length === 0) {
+      console.log("Aucune transaction trouvée.");
+      return null;
+    }
+
+    const totalSpendings = allTransac.reduce((total, transaction) => {
+      return total + transaction.transactionAmount.amount;
+    }, 0);
+
+    return totalSpendings;
+  } catch (error) {
+    console.error("Erreur lors de la calcul du total des dépenses :", error);
+    return null;
+  }
+};
 
 // determine next payment échéance
 export const calculateEndSubscriptions = async (startDate: string) => {
@@ -11,8 +31,8 @@ export const calculateEndSubscriptions = async (startDate: string) => {
 
   const start = new Date(startDate);
 
-    if (start < today) {
-      // throw new Error("The subscription start date is older than today.");
+  if (start < today) {
+    // throw new Error("The subscription start date is older than today.");
     console.warn("The subscription start date is older than today.");
   }
 

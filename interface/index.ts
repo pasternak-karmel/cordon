@@ -32,3 +32,33 @@ export interface CreditCardProps {
   amount: number;
   status: string;
 }
+
+export interface RequisitionTableProps {
+  id: string;
+  userId: string;
+  requisitionId: string;
+  status_short: string;
+  status_long: string;
+  status_description: string;
+  agreement: string;
+  accounts: string[];
+  reference: string;
+  user_language: string;
+  linkStatus: string;
+  lastSyncAt: string;
+  createdAt: string;
+  updatedAt: string;
+  status: string;
+}
+
+export interface transactionProps {
+  transactionId: string;
+  bookingDate: string;
+  transactionAmount: {
+    amount: number;
+    currency: string;
+  };
+  debtorName: string;
+  additionalInformation: string;
+  finAbonnement: string;
+}

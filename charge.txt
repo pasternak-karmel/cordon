@@ -1,25 +1,25 @@
-1. Gestion des Utilisateurs
+1. Gestion des Utilisateurs (fait remainn last point)
    - Inscription et Connexion : (Google, Facebook, Github ?).
    - Profils Utilisateurs : informations basiques (nom, email, photo).
    - Gestion de la Sécurité : réinitialisation de mot de passe, authentification à deux facteurs.
    - Paramètres de Notification : pour gérer les alertes d’abonnement et de renouvellement ainsi que les promos et baisse ou hausse de prix.
 
-2. Intégration Bancaire
+2. Intégration Bancaire (almost done)
    - Connexion à la Banque via API Plaid (ou autre) : pour extraire les transactions bancaires, identifier les paiements récurrents et les abonnements.
    - Analyse des Transactions : catégorisation des abonnements pour permettre l’identification et le suivi.
    - Mises à Jour Automatiques : synchronisation périodique pour récupérer les informations de paiement récentes.
 
-3. Gestion des Abonnements
+3. Gestion des Abonnements (brunel)
    - Tableau de Bord des Abonnements : vue d’ensemble de tous les abonnements actifs, avec montants, dates de renouvellement, fréquence de facturation.
    - Alertes de Renouvellement et Échéances : rappels avant chaque échéance d'abonnement, configurables en jours.
    - Prévisions de Dépenses : prévisions des coûts d'abonnement mensuels et annuels.
 
-4. Fonctionnalités d’Aide à la Gestion des Abonnements
+4. Fonctionnalités d’Aide à la Gestion des Abonnements (in middle)
    - Annulation de l’Abonnement : suggestion de liens directs pour annuler les abonnements, quand applicable.
    - Recommandations Personnalisées : suggestions pour réduire les coûts (exemple : passage à un forfait moins cher).
    - Comparaison des Prix : comparaison d'abonnements similaires pour optimiser les dépenses.
 
-5. Reporting et Analyse
+5. Reporting et Analyse (brunel)
    - Résumé des Dépenses Mensuelles/Annuelles : graphiques et rapports sur les dépenses liées aux abonnements.
    - Catégorisation des Abonnements : par type (divertissement, services, utilitaires, etc.).
    - Rapports de Tendance : historique des abonnements, nouveaux abonnements, résiliations, etc.
@@ -28,13 +28,13 @@
    - API d’Intégration : pour intégrer le service avec d’autres applications financières (comme une app de gestion budgétaire).
    - Exportation des Données : export en CSV ou PDF des informations d'abonnement pour usage personnel ou partage.
 
-7. Fonctionnalités Avancées (Premium)
+7. Fonctionnalités Avancées (Premium) (started)
    - Gestion des Abonnements Familiaux : possibilité de suivre et de visualiser les abonnements de la famille.
    - Gestion des Débits Automatiques : suggestions pour désactiver les prélèvements automatiques.
    - Analyse des Économies : calcul des économies réalisées en résiliant des abonnements inutilisés.
    - Possibilité d'ajouter plus d'abonnements(par défaut limité à 4? )
 
-8. Sécurité et Confidentialité
+8. Sécurité et Confidentialité (always)
    - Chiffrement des Données : pour toutes les informations utilisateur.
    - RGPD et Conformité Légale : collecte et stockage des données respectant les lois de protection des données.
    - Historique et Journalisation : journal des connexions et des modifications de paramètres.

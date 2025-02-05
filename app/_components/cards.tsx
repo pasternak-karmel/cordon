@@ -134,7 +134,7 @@ export function RecentSubscriptions({
   endingDate: string;
 }) {
   return (
-    <div className="bg-white shadow-md flex flex-row h-[75px] p-3 justify-between text-nowrap w-full rounded-md">
+    <div className="bg-white border border-gray-200 shadow-md flex flex-row h-[75px] p-3 justify-between text-nowrap w-full rounded-md">
       <div className="flex flex-row space-x-3">
         <Image
           src={SubscriptionImage}
