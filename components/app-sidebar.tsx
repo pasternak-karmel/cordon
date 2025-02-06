@@ -1,17 +1,30 @@
 "use client";
 
-import * as React from "react";
 import {
+  Activity,
+  BarChart,
+  Bell,
   Bookmark,
-  Telescope,
+  BookOpen,
   Command,
-  LifeBuoy,
-  Send,
-  Lightbulb,
   CreditCard,
+  FileText,
+  HeadphonesIcon,
+  HelpCircle,
   LayoutGrid,
-  ChartColumnIncreasing,
+  LifeBuoy,
+  Lightbulb,
+  Link,
+  Send,
+  Settings,
+  Shield,
+  Sparkles,
+  Telescope,
+  TrendingUp,
+  User,
+  Users,
 } from "lucide-react";
+import * as React from "react";
 
 import { NavMain } from "@/components/nav-main";
 import { NavSecondary } from "@/components/nav-secondary";
@@ -41,34 +54,110 @@ const data = {
       items: [],
     },
     {
-      title: "Discover",
+      title: "Support",
       url: "#",
       icon: Telescope,
-      items: [],
+      items: [
+        {
+          title: "Help Center & Documentation",
+          url: "#",
+          icon: BookOpen,
+        },
+        {
+          title: "Contact Support",
+          url: "#",
+          icon: HeadphonesIcon,
+        },
+        {
+          title: "Status & Service Updates",
+          url: "#",
+          icon: Activity,
+        },
+        {
+          title: "Community & Self-Help",
+          url: "#",
+          icon: Users,
+        },
+        {
+          title: "Legal & Policies",
+          url: "#",
+          icon: FileText,
+        },
+      ],
     },
     {
-      title: "My Subscriptions",
+      title: "Profile",
       url: "#",
       icon: Bookmark,
-      items: [],
-    },
-    {
-      title: "Cards",
-      url: "/cards",
-      icon: CreditCard,
-      items: [],
+      items: [
+        {
+          title: "Personal Information",
+          url: "#",
+          icon: User,
+        },
+        {
+          title: "Account Settings",
+          url: "#",
+          icon: Settings,
+        },
+        {
+          title: "Subscription & Billing",
+          url: "#",
+          icon: CreditCard,
+        },
+        {
+          title: "Connected Accounts & Integrations",
+          url: "#",
+          icon: Link,
+        },
+        {
+          title: "Notifications & Preferences",
+          url: "#",
+          icon: Bell,
+        },
+        {
+          title: "Security & Privacy",
+          url: "#",
+          icon: Shield,
+        },
+        {
+          title: "Support & Help",
+          url: "#",
+          icon: HelpCircle,
+        },
+      ],
     },
     {
       title: "Insights",
       url: "#",
       icon: Lightbulb,
-      items: [],
-    },
-    {
-      title: "Reports",
-      url: "#",
-      icon: ChartColumnIncreasing,
-      items: [],
+      items: [
+        {
+          title: "Subscription Overview",
+          url: "#",
+          icon: CreditCard,
+        },
+        {
+          title: "AI-Powered Recommendations",
+          url: "#",
+          icon: Sparkles,
+        },
+        {
+          title: "Spending Trends & Analytics",
+          url: "#",
+          icon: TrendingUp,
+        },
+        {
+          title: "Personalized Alerts & Actions",
+          url: "#",
+          icon: Bell,
+        },
+        {
+          title: "Financial Wellness Score",
+          url: "#",
+          icon: BarChart,
+        },
+      ],
     },
   ],
   navSecondary: [

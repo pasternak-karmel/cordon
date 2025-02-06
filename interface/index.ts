@@ -62,3 +62,16 @@ export interface transactionProps {
   additionalInformation: string;
   finAbonnement: string;
 }
+
+export interface PricingCardProps  {
+  title: string;
+  price: number;
+  features: string[];
+  isPopular: boolean;
+  isPerMonth: boolean;
+  description: string;
+};
+
+export interface PricingSectionProps {
+  billingCards: PricingCardProps[];
+}
