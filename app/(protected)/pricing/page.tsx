@@ -88,13 +88,16 @@ export default function page() {
     },
   ];
   return (
-      <div className="w-full">
-          {/*
+    <div className="w-full">
+      {/*
               <h6 className="text-4xl font-thin text-justify mt-10">
               We have got a plan that&apos;s perfect for you
               </h6>
           */}
-      <Tabs defaultValue="account" className="w-full h-full">
+      <Tabs
+        defaultValue="monthly"
+        className="w-full h-full flex flex-col items-center justify-center"
+      >
         <TabsList className="grid w-fit grid-cols-2">
           <TabsTrigger value="monthly" className="w-fit">
             Monthly billing

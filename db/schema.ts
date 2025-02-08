@@ -1,3 +1,4 @@
+import { urlDb } from "@/env";
 import {
   boolean,
   index,
@@ -14,8 +15,7 @@ import type { AdapterAccountType } from "next-auth/adapters";
 import postgres from "postgres";
 // DATABASE_URL=postgres://postgres:23052005AB@127.0.0.1:5432/cordon
 
-const connectionString = "postgres://postgres:23052005AB@127.0.0.1:5432/cordon";
-const pool = postgres(connectionString, { max: 1 });
+const pool = postgres(urlDb, { max: 1 });
 
 export const db = drizzle(pool);
 
@@ -106,8 +106,6 @@ export const authenticators = pgTable(
   })
 );
 
-
-
 export const RequisitionTable = pgTable(
   "requisition_table",
   {
@@ -185,7 +183,6 @@ export const subscriptions = pgTable(
     trial_start: timestamp("trial_start", { mode: "date" }),
     trial_end: timestamp("trial_end", { mode: "date" }),
     cancel_at: timestamp("cancel_at", { mode: "date" }),
-
   },
   (subscriptionTable) => ({
     userIdIdx: index("subscriptions_user_id_idx").on(subscriptionTable.userId),

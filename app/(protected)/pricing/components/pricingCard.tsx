@@ -37,7 +37,7 @@ export function PricingCard({
           </div>
           <h6>{description}</h6>
           <div className="flex justify-center">
-            <Button className="w-full">Get Started</Button>
+            <Button className="w-full">Choose this plan</Button>
           </div>
         </div>
       </div>
