@@ -108,6 +108,26 @@ const ManageAccount = cache(async (): Promise<boolean> => {
   }
 });
 
-export { canAddAccount, ManageAccount, manageSubscriptionStatusChange };
+const hasLinkedAccount = cache(async (): Promise<boolean> => {
+  const id = await getUser();
+  if (!id) throw new Error("User not found");
+  const userAccount = await db
+    .select()
+    .from(RequisitionTable)
+    .where(eq(RequisitionTable.userId, id))
+    .execute();
+
+  if (userAccount.length > 0) {
+    return true;
+  }
+  return false;
+});
+
+export {
+  canAddAccount,
+  hasLinkedAccount,
+  ManageAccount,
+  manageSubscriptionStatusChange,
+};
 
 // .where(eq(RequisitionTable.linkStatus, "active")).where(eq(RequisitionTable.status_short, "ACTIVE"))

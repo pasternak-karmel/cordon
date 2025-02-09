@@ -1,4 +1,6 @@
+import { canAddAccount, hasLinkedAccount } from "@/actions/admin";
 import { userSub } from "@/actions/calcule";
+import { getRecentSubscription } from "@/actions/estimate";
 import { baseProcedure, createTRPCRouter } from "../init";
 export const appRouter = createTRPCRouter({
   // exemple de comment faire en use client
@@ -16,6 +18,17 @@ export const appRouter = createTRPCRouter({
   getUserSubscriptions: baseProcedure.query(async () => {
     const subscriptions = await userSub();
     return subscriptions;
+  }),
+  getRecentSubscription: baseProcedure.query(async () => {
+    const subscriptions = await getRecentSubscription();
+    return subscriptions;
+  }),
+  canAddAccount: baseProcedure.query(async () => {
+    const canAdd = await canAddAccount();
+    return canAdd;
+  }),
+  hasLinkedAccount: baseProcedure.query(async () => {
+    return await hasLinkedAccount();
   }),
 });
 // export type definition of API
