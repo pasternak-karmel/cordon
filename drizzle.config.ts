@@ -11,7 +11,7 @@ export default defineConfig({
   dbCredentials: {
     // url: process.env.DATABASE_URL!,
 
-    // url: "postgres://postgres:moiKarmel@localhost:5432/cordon",
+    // url: "postgres://postgres:moikarmel@127.0.0.1:5432/cordon",
     url: urlDb,
     //postgres:"//postgres:23052005AB@127.0.0.1:5432/cordon",
   },

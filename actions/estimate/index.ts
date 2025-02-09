@@ -1,6 +1,7 @@
 "use server";
 
 import { transactionProps } from "@/interface";
+import { userSub } from "../calcule";
 
 // calculer montant total entrain d'être dépensé
 export const calculateSpendings = async (
@@ -42,4 +43,19 @@ export const calculateEndSubscriptions = async (startDate: string) => {
   return next.toISOString().split("T")[0];
 };
 
-export const getRecentSubscription = async () => {};
+export const getRecentSubscription = async (): Promise<transactionProps[]> => {
+  const today = new Date();
+  const start = new Date(today);
+
+  const end = new Date(today);
+
+  const userSubscription = await userSub();
+
+  if (!userSubscription.subscription) return [];
+
+  return userSubscription.subscription.filter(
+    (subscription) =>
+      subscription.bookingDate >= start.toISOString() &&
+      subscription.finAbonnement <= end.toISOString()
+  );
+};

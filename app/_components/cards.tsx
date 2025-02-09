@@ -1,18 +1,16 @@
-"use client"
-import React from "react";
-import Image from "next/image";
-import { ChevronRight, CalendarDays, Check, Wallet } from "lucide-react";
+"use client";
+import { BarChartComponent } from "@/app/_components/chartComponent";
+import { PieChartComponent } from "@/app/_components/piechart";
+import { Button } from "@/components/ui/button";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { Button } from "@/components/ui/button";
-import { PieChartComponent } from "@/app/_components/piechart";
-import { BarChartComponent } from "@/app/_components/chartComponent";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { subscriptionDetailProps } from "@/interface";
-import {useNextPaymentStore} from "@/store/useNextPaymentStore"
+import { useNextPaymentStore } from "@/store/useNextPaymentStore";
+import { CalendarDays, Check, ChevronRight, Wallet } from "lucide-react";
+import Image from "next/image";
 export function SubscriptionCard({
   title,
   imageUrl,
@@ -29,10 +27,11 @@ export function SubscriptionCard({
   endingDate: string;
   subscriptionCategory: string;
   subscriptionPrice: number;
-  }) {
-  const {updateSubscription} = useNextPaymentStore()
+}) {
+  const { updateSubscription } = useNextPaymentStore();
   return (
-    <div className="flex flex-col justify-center w-[350px] h-[210px] p-3 bg-white shadow-md rounded-md"
+    <div
+      className="flex flex-col justify-center w-[350px] h-[210px] p-3 bg-white shadow-md rounded-md"
       onClick={() => {
         updateSubscription({
           title,
@@ -42,8 +41,9 @@ export function SubscriptionCard({
           endingDate,
           subscriptionCategory,
           subscriptionPrice,
-        })
-    }}>
+        });
+      }}
+    >
       <div className="flex justify-between">
         <div className="flex space-x-5">
           <Image
@@ -143,7 +143,7 @@ export function RecentSubscriptions({
 }: {
   title: string;
   SubscriptionImage: string;
-  subscriptionPrice: number;
+  subscriptionPrice: string | number;
   subscriptionCategory: string;
   endingDate: string;
 }) {
@@ -218,16 +218,16 @@ export function PieChartCard() {
   );
 }
 
-export function BarChartCard() {
+export function BarChartCard({ total }: { total: number | null }) {
   return (
     <div className="h-full">
-      <BarChartComponent />
+      <BarChartComponent total={total} />
     </div>
   );
 }
 
 export function SubscriptionDetailsCard() {
-  const { subscription } = useNextPaymentStore()
+  const { subscription } = useNextPaymentStore();
   return (
     <div className="bg-white shadow-md rounded-md w-[370px] h-[80vh] p-3 flex flex-col justify-between text-gray-500">
       <div className="flex justify-between bg-gray-100 h-[80px] rounded-md px-6  items-center">
@@ -240,8 +240,12 @@ export function SubscriptionDetailsCard() {
             alt="Subscription logo"
           />
           <div className="flex flex-col">
-            <h2 className="text-2xl text-gray-800">{subscription.SubscriptionTitle}</h2>
-            <h6 className="text-sm text-gray-400">{subscription.subscriptionType}</h6>
+            <h2 className="text-2xl text-gray-800">
+              {subscription.SubscriptionTitle}
+            </h2>
+            <h6 className="text-sm text-gray-400">
+              {subscription.subscriptionType}
+            </h6>
           </div>
         </div>
         <ChevronRight />
@@ -251,7 +255,9 @@ export function SubscriptionDetailsCard() {
 
         <div className="bg-gray-100 h-[80px] rounded-md px-6 flex justify-between items-center">
           <div>
-            <h3 className="text-gray-800 text-xl">{subscription.SubscriptionTitle}</h3>
+            <h3 className="text-gray-800 text-xl">
+              {subscription.SubscriptionTitle}
+            </h3>
             <h6 className="text-sm">{subscription.subscriptionCategory}</h6>
           </div>
           <Button variant="shine" className="bg-blue-500 text-white">

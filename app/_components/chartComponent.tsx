@@ -34,11 +34,11 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function BarChartComponent() {
+export function BarChartComponent({ total }: { total: number | null }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>$840</CardTitle>
+        <CardTitle>{total ? `$${total}` : "0$"}</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
       </CardHeader>
       <CardContent>
