@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { PricingCardProps } from "@/interface/index";
-import { Check } from "lucide-react";
+import { CircleCheck } from "lucide-react";
 
 export function PricingCard({
   title,
@@ -49,7 +49,7 @@ export function PricingCard({
           {features.map((feature, index) => (
             <li key={index} className="flex flex-row gap-2">
               <div className="p-1 bg-lime-400 rounded-full">
-                <Check size={18} />
+                <CircleCheck size={18} />
               </div>
               {feature}
             </li>

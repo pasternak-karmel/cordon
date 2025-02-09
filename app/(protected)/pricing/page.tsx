@@ -2,7 +2,7 @@ import { PricingCard } from "@/app/(protected)/pricing/components/pricingCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PricingCardProps, PricingSectionProps } from "@/interface/index";
 
-export default function page() {
+export default function PricingPage() {
   const monthlyBilling: PricingCardProps[] = [
     {
       title: "Free",
@@ -87,44 +87,84 @@ export default function page() {
       ],
     },
   ];
+
   return (
-    <div className="w-full">
-      {/*
-              <h6 className="text-4xl font-thin text-justify mt-10">
-              We have got a plan that&apos;s perfect for you
-              </h6>
-          */}
-      <Tabs
-        defaultValue="monthly"
-        className="w-full h-full flex flex-col items-center justify-center"
-      >
-        <TabsList className="grid w-fit grid-cols-2">
-          <TabsTrigger value="monthly" className="w-fit">
-            Monthly billing
-          </TabsTrigger>
-          <TabsTrigger value="annual" className="w-fit">
-            Annual billing
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent value="monthly" className="w-full h-full">
-          <PricingSection billingCards={monthlyBilling} />
-        </TabsContent>
-        <TabsContent value="annual" className="w-full h-full">
-          <PricingSection billingCards={annualBilling} />
-        </TabsContent>
-      </Tabs>
+    <div className="w-full max-w-7xl mx-auto px-4 py-16">
+      <div className="text-center space-y-4 mb-16">
+        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+          Simple, transparent pricing
+        </h1>
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          Choose the perfect plan for your needs. All plans include 14-day free trial.
+        </p>
+      </div>
+
+      <div className="mb-8 flex items-center justify-center gap-4">
+        <Tabs
+          defaultValue="monthly"
+          className="w-full"
+        >
+          <div className="flex flex-col items-center gap-4">
+            <TabsList className="grid w-[400px] grid-cols-2">
+              <TabsTrigger value="monthly">
+                Monthly billing
+              </TabsTrigger>
+              <TabsTrigger value="annual">
+                Annual billing
+                <span className="ml-2 rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-semibold text-green-600">
+                  Save 20%
+                </span>
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="monthly" className="w-full">
+              <PricingSection billingCards={monthlyBilling} />
+            </TabsContent>
+            <TabsContent value="annual" className="w-full">
+              <PricingSection billingCards={annualBilling} />
+            </TabsContent>
+          </div>
+        </Tabs>
+      </div>
+
+      <div className="mt-16 border-t pt-8">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-bold">Frequently Asked Questions</h2>
+        </div>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+          <FAQCard
+            question="How does the 14-day trial work?"
+            answer="You can try any plan free for 14 days. No credit card required."
+          />
+          <FAQCard
+            question="Can I switch plans later?"
+            answer="Yes, you can upgrade or downgrade your plan at any time."
+          />
+          <FAQCard
+            question="What payment methods do you accept?"
+            answer="We accept all major credit cards, PayPal, and bank transfers."
+          />
+        </div>
+      </div>
     </div>
   );
 }
 
 const PricingSection = ({ billingCards }: PricingSectionProps) => {
   return (
-    <div className="h-full">
-      <div className="w-full h-full flex flex-wrap justify-center gap-5 items-center">
-        {billingCards.map((card, index) => (
-          <PricingCard key={index} {...card} />
-        ))}
-      </div>
+    <div className="w-full flex flex-row flex-wrap gap-5 md:justify-between justify-center">
+      {billingCards.map((card, index) => (
+        <PricingCard key={index} {...card} />
+      ))}
+    </div>
+  );
+};
+
+const FAQCard = ({ question, answer }: { question: string; answer: string }) => {
+  return (
+    <div className="rounded-lg border p-6 shadow-sm">
+      <h3 className="font-semibold mb-2">{question}</h3>
+      <p className="text-muted-foreground">{answer}</p>
     </div>
   );
 };

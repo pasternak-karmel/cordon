@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import Image from "next/image";
 import { ChevronRight, CalendarDays, Check, Wallet } from "lucide-react";
@@ -10,7 +11,8 @@ import { Button } from "@/components/ui/button";
 import { PieChartComponent } from "@/app/_components/piechart";
 import { BarChartComponent } from "@/app/_components/chartComponent";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
+import { subscriptionDetailProps } from "@/interface";
+import {useNextPaymentStore} from "@/store/useNextPaymentStore"
 export function SubscriptionCard({
   title,
   imageUrl,
@@ -27,9 +29,21 @@ export function SubscriptionCard({
   endingDate: string;
   subscriptionCategory: string;
   subscriptionPrice: number;
-}) {
+  }) {
+  const {updateSubscription} = useNextPaymentStore()
   return (
-    <div className="flex flex-col justify-center w-[350px] h-[210px] p-3 bg-white shadow-md rounded-md">
+    <div className="flex flex-col justify-center w-[350px] h-[210px] p-3 bg-white shadow-md rounded-md"
+      onClick={() => {
+        updateSubscription({
+          title,
+          imageUrl,
+          remainingDays,
+          startingDate,
+          endingDate,
+          subscriptionCategory,
+          subscriptionPrice,
+        })
+    }}>
       <div className="flex justify-between">
         <div className="flex space-x-5">
           <Image
@@ -212,41 +226,22 @@ export function BarChartCard() {
   );
 }
 
-export function SubscriptionDetailsCard({
-  SubscriptionTitle,
-  subscriptionLogoUrl,
-  subscriptionCategory,
-  remainingDays,
-  startingDate,
-  endingDate,
-  paymentsHistory,
-  subscriptionPrice,
-  subscriptionType,
-}: {
-  SubscriptionTitle: string;
-  subscriptionLogoUrl: string;
-  subscriptionCategory: string;
-  remainingDays: number;
-  startingDate: string;
-  endingDate: string;
-  subscriptionPrice: number;
-  subscriptionType: string;
-  paymentsHistory: { paymentDate: string; paymentCategory: string }[];
-}) {
+export function SubscriptionDetailsCard() {
+  const { subscription } = useNextPaymentStore()
   return (
     <div className="bg-white shadow-md rounded-md w-[370px] h-[80vh] p-3 flex flex-col justify-between text-gray-500">
       <div className="flex justify-between bg-gray-100 h-[80px] rounded-md px-6  items-center">
         <div className="flex space-x-5">
           <Image
-            src={subscriptionLogoUrl}
+            src={subscription.subscriptionLogoUrl}
             width={50}
             height={50}
             className="rounded-full overflow-hidden w-[50px] h-[50px]"
             alt="Subscription logo"
           />
           <div className="flex flex-col">
-            <h2 className="text-2xl text-gray-800">{SubscriptionTitle}</h2>
-            <h6 className="text-sm text-gray-400">{subscriptionType}</h6>
+            <h2 className="text-2xl text-gray-800">{subscription.SubscriptionTitle}</h2>
+            <h6 className="text-sm text-gray-400">{subscription.subscriptionType}</h6>
           </div>
         </div>
         <ChevronRight />
@@ -256,8 +251,8 @@ export function SubscriptionDetailsCard({
 
         <div className="bg-gray-100 h-[80px] rounded-md px-6 flex justify-between items-center">
           <div>
-            <h3 className="text-gray-800 text-xl">{SubscriptionTitle}</h3>
-            <h6 className="text-sm">{subscriptionCategory}</h6>
+            <h3 className="text-gray-800 text-xl">{subscription.SubscriptionTitle}</h3>
+            <h6 className="text-sm">{subscription.subscriptionCategory}</h6>
           </div>
           <Button variant="shine" className="bg-blue-500 text-white">
             Change
@@ -270,16 +265,16 @@ export function SubscriptionDetailsCard({
             <h5>Ends at</h5>
           </div>
           <div className="space-y-2 ml-8 text-gray-800">
-            <h5>{remainingDays} Days left</h5>
-            <h5>{startingDate}</h5>
-            <h5>{endingDate}</h5>
+            <h5>{subscription.remainingDays} Days left</h5>
+            <h5>{subscription.startingDate}</h5>
+            <h5>{subscription.endingDate}</h5>
           </div>
         </div>
         <div className="">
           <h3>Payment History</h3>
           <ScrollArea className="h-[100px]">
             <div className="space-y-2">
-              {paymentsHistory.map((payment, i) => {
+              {subscription.paymentsHistory.map((payment, i) => {
                 return (
                   <div
                     key={i}
@@ -307,7 +302,7 @@ export function SubscriptionDetailsCard({
         className="text-white text-center bg-blue-600 w-full hover:bg-blue-800 p-2 rounded-md"
       >
         <Wallet className="mr-3" />
-        Renew for ${subscriptionPrice}
+        Renew for ${subscription.subscriptionPrice}
       </Button>
     </div>
   );

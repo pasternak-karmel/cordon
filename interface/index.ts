@@ -75,3 +75,14 @@ export interface PricingCardProps  {
 export interface PricingSectionProps {
   billingCards: PricingCardProps[];
 }
+export interface subscriptionDetailProps {
+  SubscriptionTitle: string;
+  subscriptionLogoUrl: string;
+  subscriptionCategory: string;
+  remainingDays: number;
+  startingDate: string;
+  endingDate: string;
+  subscriptionPrice: number;
+  subscriptionType: string;
+  paymentsHistory: { paymentDate: string; paymentCategory: string }[];
+}
