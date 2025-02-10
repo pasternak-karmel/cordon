@@ -52,13 +52,19 @@ const data = {
       icon: LayoutGrid,
       isActive: true,
       items: [],
+    },{
+      title: "Billing",
+      url: "/billing",
+      icon: LayoutGrid,
+      isActive: true,
+      items: [],
     },
     {
       title: "Support",
       url: "#",
       icon: Telescope,
       items: [
-        {
+        /*{
           title: "Help Center & Documentation",
           url: "#",
           icon: BookOpen,
@@ -82,15 +88,15 @@ const data = {
           title: "Legal & Policies",
           url: "#",
           icon: FileText,
-        },
+        }*/,
       ],
     },
     {
       title: "Profile",
-      url: "#",
+      url: "profile",
       icon: Bookmark,
       items: [
-        {
+        /*{
           title: "Personal Information",
           url: "#",
           icon: User,
@@ -124,8 +130,15 @@ const data = {
           title: "Support & Help",
           url: "#",
           icon: HelpCircle,
-        },
+        }*/,
       ],
+    },
+    {
+      title: "Pricing",
+      url: "/pricing",
+      icon: LayoutGrid,
+      isActive: true,
+      items: [],
     },
     {
       title: "Insights",

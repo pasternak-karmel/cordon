@@ -1,4 +1,4 @@
-import AccountPage from "../(compte)/account/page";
+import AccountPage from "../../(compte)/account/page";
 
 const EmptySubscription = () => {
   return (
