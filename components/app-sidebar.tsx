@@ -50,76 +50,11 @@ const data = {
       icon: Link,
       items: [],
     },
-    // profil
-    // {
-    //   title: "Profile",
-    //   url: "#",
-    //   icon: Bookmark,
-    //   items: [
-    //     {
-    //       title: "Personal Information",
-    //       url: "#",
-    //       icon: User,
-    //     },
-    //     {
-    //       title: "Account Settings",
-    //       url: "#",
-    //       icon: Settings,
-    //     },
-    //     {
-    //       title: "Subscription & Billing",
-    //       url: "#",
-    //       icon: CreditCard,
-    //     },
-    //     {
-    //       title: "Notifications & Preferences",
-    //       url: "#",
-    //       icon: Bell,
-    //     },
-    //     {
-    //       title: "Security & Privacy",
-    //       url: "#",
-    //       icon: Shield,
-    //     },
-    //     {
-    //       title: "Support & Help",
-    //       url: "#",
-    //       icon: HelpCircle,
-    //     },
-    //   ],
-    // },
     //support
     {
       title: "Support",
       url: "#",
       icon: Telescope,
-      items: [
-        ,/*{
-          title: "Help Center & Documentation",
-          url: "#",
-          icon: BookOpen,
-        },
-        {
-          title: "Contact Support",
-          url: "#",
-          icon: HeadphonesIcon,
-        },
-        {
-          title: "Status & Service Updates",
-          url: "#",
-          icon: Activity,
-        },
-        {
-          title: "Community & Self-Help",
-          url: "#",
-          icon: Users,
-        },
-        {
-          title: "Legal & Policies",
-          url: "#",
-          icon: FileText,
-        }*/
-      ],
     },
     // insights
     {
@@ -129,7 +64,7 @@ const data = {
     },
     {
       title: "Pricing",
-      url: "pricing",
+      url: "/pricing",
       icon: LayoutGrid,
       isActive: true,
       items: [],

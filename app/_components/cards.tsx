@@ -11,7 +11,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { initialState, useNextPaymentStore } from "@/store/useNextPaymentStore";
 import { CalendarDays, Check, ChevronRight, Wallet, X } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
 export function SubscriptionCard({
   title,
   imageUrl,
@@ -234,7 +233,9 @@ export function SubscriptionDetailsCard() {
   return (
     <div className="bg-white shadow-md rounded-md w-[370px] h-[80vh] p-3 flex flex-col justify-between text-gray-500 relative">
       <button
-        onClick={() => { updateSubscription(initialState) }}
+        onClick={() => {
+          updateSubscription(initialState);
+        }}
         className="absolute right-0 -top-5 bg-white h-8 w-8 bg-transparent rounded-md flex items-center justify-center"
       >
         <X size={16} color="black" />

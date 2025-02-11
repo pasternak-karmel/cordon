@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { trpc } from "@/trpc/client";
-import { Loader2 } from "lucide-react";
+import { Loader } from "lucide-react";
 import AccountPage from "../(compte)/account/page";
 
 export default function ConnectedAccounts() {
@@ -25,7 +25,7 @@ export default function ConnectedAccounts() {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        <Loader className="h-5 w-5 animate-spin text-primary" />
       </div>
     );
   }

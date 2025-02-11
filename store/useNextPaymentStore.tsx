@@ -1,8 +1,6 @@
 import { subscriptionDetailProps, SubscriptionStore } from "@/interface/index";
 import { create } from "zustand";
 
-
-
 export const initialState: subscriptionDetailProps = {
   SubscriptionTitle: "",
   subscriptionLogoUrl: "",
@@ -25,6 +23,3 @@ export const useNextPaymentStore = create<SubscriptionStore>((set) => ({
       },
     })),
 }));
-
-
-

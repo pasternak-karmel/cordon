@@ -11,10 +11,10 @@ export const createApiAxios = async () => {
     throw new Error("Failed to get access token");
   }
 
-  console.log(
-    "Creating axios instance with token:",
-    token.slice(0, 10) + "..."
-  );
+  // console.log(
+  //   "Creating axios instance with token:",
+  //   token.slice(0, 10) + "..."
+  // );
 
   return axios.create({
     baseURL: `${url_gocardless}/api`,
