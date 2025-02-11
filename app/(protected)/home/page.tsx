@@ -9,13 +9,8 @@ export default function Dashboard() {
   const { data: sub } = trpc.getUserSubscriptions.useQuery();
   const { data: hasLinkedAccount } = trpc.hasLinkedAccount.useQuery();
 
-  if (sub?.subscription.length === 0) return <EmptySubscription />;
-  else if (!hasLinkedAccount)
-    return (
-      <div className="mt-5 h-[50vh]">
-        <EmptySubscription />
-      </div>
-    );
+  if (sub?.subscription.length === 0 || !hasLinkedAccount)
+    return <EmptySubscription />;
   else
     return (
       <div className="px-4 sm:px-6 pt-8 h-fit">

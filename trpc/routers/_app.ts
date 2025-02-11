@@ -5,38 +5,31 @@ import {
 } from "@/actions/admin";
 import { userSub } from "@/actions/calcule";
 import { getRecentSubscription } from "@/actions/estimate";
-import { baseProcedure, createTRPCRouter, protectedProcedure } from "../init";
+import { TRPCError } from "@trpc/server";
+import { createTRPCRouter, protectedProcedure } from "../init";
 export const appRouter = createTRPCRouter({
-  // exemple de comment faire en use client
-  //   hello: baseProcedure
-  //     .input(
-  //       z.object({
-  //         text: z.string(),
-  //       })
-  //     )
-  //     .query((opts) => {
-  //       return {
-  //         greeting: `hello ${opts.input.text}`,
-  //       };
-  //     }),
-  getUserSubscriptions: baseProcedure.query(async () => {
+  getUserSubscriptions: protectedProcedure.query(async () => {
     const subscriptions = await userSub();
     return subscriptions;
   }),
-  getRecentSubscription: baseProcedure.query(async () => {
+  getRecentSubscription: protectedProcedure.query(async () => {
     const subscriptions = await getRecentSubscription();
     return subscriptions;
   }),
-  canAddAccount: baseProcedure.query(async () => {
+  canAddAccount: protectedProcedure.query(async () => {
     const canAdd = await canAddAccount();
     return canAdd;
   }),
-  hasLinkedAccount: baseProcedure.query(async () => {
+  hasLinkedAccount: protectedProcedure.query(async () => {
     return await hasLinkedAccount();
   }),
   getConnectedAccounts: protectedProcedure.query(async ({ ctx }) => {
-    console.log("this is the user email", ctx.session.user.email);
-    return await getConnectedAccounts(ctx.session.user.email!);
+    const email = ctx.session.user.email;
+    if (!email) {
+      throw new TRPCError({ code: "UNAUTHORIZED", message: "Unauthorized" });
+    }
+
+    return await getConnectedAccounts(email);
   }),
 });
 // export type definition of API
