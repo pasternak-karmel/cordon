@@ -1,4 +1,6 @@
 export const getURL = (path: string = "") => {
+  if (typeof window !== "undefined") return "";
+
   // Check if NEXT_PUBLIC_SITE_URL is set and non-empty. Set this to your site URL in production env.
   let url =
     process?.env?.NEXT_PUBLIC_SITE_URL &&

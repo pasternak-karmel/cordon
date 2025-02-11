@@ -52,7 +52,52 @@ const data = {
       icon: LayoutGrid,
       isActive: true,
       items: [],
+    },{
+      title: "Connected Accounts & Integrations",
+      url: "/connected-accounts",
+      icon: Link,
+      isActive: true,
+      items: [],
     },
+    // profil
+    {
+      title: "Profile",
+      url: "#",
+      icon: Bookmark,
+      items: [
+        {
+          title: "Personal Information",
+          url: "#",
+          icon: User,
+        },
+        {
+          title: "Account Settings",
+          url: "#",
+          icon: Settings,
+        },
+        {
+          title: "Subscription & Billing",
+          url: "#",
+          icon: CreditCard,
+        },
+        {
+          title: "Notifications & Preferences",
+          url: "#",
+          icon: Bell,
+        },
+        {
+          title: "Security & Privacy",
+          url: "#",
+          icon: Shield,
+        },
+        {
+          title: "Support & Help",
+          url: "#",
+          icon: HelpCircle,
+        },
+      ],
+    },
+    //support
     {
       title: "Support",
       url: "#",
@@ -85,48 +130,7 @@ const data = {
         },
       ],
     },
-    {
-      title: "Profile",
-      url: "#",
-      icon: Bookmark,
-      items: [
-        {
-          title: "Personal Information",
-          url: "#",
-          icon: User,
-        },
-        {
-          title: "Account Settings",
-          url: "#",
-          icon: Settings,
-        },
-        {
-          title: "Subscription & Billing",
-          url: "#",
-          icon: CreditCard,
-        },
-        {
-          title: "Connected Accounts & Integrations",
-          url: "#",
-          icon: Link,
-        },
-        {
-          title: "Notifications & Preferences",
-          url: "#",
-          icon: Bell,
-        },
-        {
-          title: "Security & Privacy",
-          url: "#",
-          icon: Shield,
-        },
-        {
-          title: "Support & Help",
-          url: "#",
-          icon: HelpCircle,
-        },
-      ],
-    },
+    // insights
     {
       title: "Insights",
       url: "#",

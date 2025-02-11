@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { DollarSign, Settings } from "lucide-react";
-import { CreditCardComponent, TransactionsCards } from "./components/creditCardComponent";
+import {
+  CreditCardComponent,
+  TransactionsCards,
+} from "./components/creditCardComponent";
 import SubscriptionsCategory from "./components/subscriptionsCategory";
 // rename le nom de la page padre
 export default function page() {
@@ -22,28 +25,32 @@ export default function page() {
         </div>
         <div className="flex gap-3 items-center">
           <div className="border rounded-md p-2 h-[40px] bg-white cursor-pointer hover:bg-gray-100">
-          <Settings size={25}/>
-
+            <Settings size={25} />
           </div>
-          <Button variant={"default"} className="bg-[#2563eb]">Add a new Card</Button>
+          <Button variant={"default"} className="bg-[#2563eb]">
+            Add a new Card
+          </Button>
         </div>
       </div>
-      <div className="flex flex-row justify-between mt-12">{Array(1,2,3,4).map((_, index) => (
-        <div key={index}>
-        <CreditCardComponent cardType="Master Card" cardNumber="1452 1553 1452 1456" amount={1400} />
-
-        </div>
-      ))}</div>
+      <div className="flex flex-row justify-between mt-12">
+        {[1, 2, 3, 4].map((_, index) => (
+          <div key={index}>
+            <CreditCardComponent
+              cardType="Master Card"
+              cardNumber="1452 1553 1452 1456"
+              amount={1400}
+            />
+          </div>
+        ))}
+      </div>
       <div className="mt-8 flex flex-row flex-wrap justify-between">
         <div className="w-[650px]">
-          <SubscriptionsCategory/>
+          <SubscriptionsCategory />
         </div>
         <div className="w-[480px]">
-        <TransactionsCards/>
-
+          <TransactionsCards />
         </div>
       </div>
-      
     </div>
-  )
+  );
 }

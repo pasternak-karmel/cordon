@@ -1,0 +1,1 @@
+ALTER TABLE "requisition_table" ADD COLUMN "institutionName" text NOT NULL;

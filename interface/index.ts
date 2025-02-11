@@ -49,6 +49,7 @@ export interface RequisitionTableProps {
   createdAt: string;
   updatedAt: string;
   status: string;
+  institutionName: string;
 }
 
 export interface transactionProps {

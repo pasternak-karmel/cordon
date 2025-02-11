@@ -1,6 +1,6 @@
 "use server";
 
-import { getUser, getUserById } from "@/data/account";
+import { getUser, getUserByEmail, getUserById } from "@/data/account";
 import {
   db,
   RequisitionTable,
@@ -123,8 +123,23 @@ const hasLinkedAccount = cache(async (): Promise<boolean> => {
   return false;
 });
 
+const getConnectedAccounts = cache(async (email: string) => {
+  if (!email) throw new Error("Something went wrong");
+  const user = await getUserByEmail(email);
+  if (!user || !user?.id) throw new Error("User not found");
+  const userAccount = await db
+    .select()
+    .from(RequisitionTable)
+    .where(eq(RequisitionTable.userId, user.id))
+    .orderBy(RequisitionTable.createdAt)
+    .execute();
+
+  return userAccount;
+});
+
 export {
   canAddAccount,
+  getConnectedAccounts,
   hasLinkedAccount,
   ManageAccount,
   manageSubscriptionStatusChange,

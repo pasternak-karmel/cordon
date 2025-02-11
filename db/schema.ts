@@ -126,6 +126,7 @@ export const RequisitionTable = pgTable(
     createdAt: timestamp("createdAt", { mode: "date" }).defaultNow().notNull(),
     updatedAt: timestamp("updatedAt", { mode: "date" }).defaultNow().notNull(),
     status: text("status").notNull().default("ACTIVE"),
+    institutionName: text("institutionName").notNull(),
   },
   (requisitionTable) => ({
     userIdIdx: index("bank_accounts_user_id_idx").on(requisitionTable.userId),
