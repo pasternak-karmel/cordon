@@ -48,20 +48,20 @@ const ChooseCountry = () => {
             <div
               key={i}
               onClick={() => handleClick(country.value)}
-              className="flex items-center justify-between space-x-4 rounded-md border p-3 transition-colors hover:bg-gray-100 cursor-pointer"
+              className="flex items-center justify-between space-x-4 rounded-md border p-3 transition-colors hover:bg-gray-100 cursor-pointer relative"
             >
               <div className="flex items-center space-x-3">
                 <div className="relative h-6 w-9 overflow-hidden rounded-sm">
                   <Image
-                    src={country.flag || "/placeholder.svg"}
+                    src={country.flag ? country.flag :  "/placeholder.svg"}
                     alt={country.description}
                     layout="fill"
                     objectFit="cover"
                   />
                 </div>
-                <span className="font-medium">{country.name}</span>
+                <h6 className="font-medium text-nowrap">{country.name}</h6>
               </div>
-              <ChevronRight className="h-5 w-5 text-gray-400" />
+              <ChevronRight className="h-5 w-5 text-gray-400 absolute right-1" />
             </div>
           ))}
         </div>

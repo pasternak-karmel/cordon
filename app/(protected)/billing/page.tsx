@@ -51,7 +51,7 @@ export default function Billing() {
       </div>
       <h6 className="text-xl">Previous Invoices</h6>
       <div>
-        <Tabs defaultValue="account" className="w-full">
+        <Tabs defaultValue="all" className="w-full">
           <div className="flex flex-row justify-between flex-wrap"><TabsList className="grid w-[400px] grid-cols-3">
             <TabsTrigger value="all">View all</TabsTrigger>
             <TabsTrigger value="active">Active</TabsTrigger>

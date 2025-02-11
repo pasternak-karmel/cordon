@@ -8,9 +8,10 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useNextPaymentStore } from "@/store/useNextPaymentStore";
-import { CalendarDays, Check, ChevronRight, Wallet } from "lucide-react";
+import { initialState, useNextPaymentStore } from "@/store/useNextPaymentStore";
+import { CalendarDays, Check, ChevronRight, Wallet, X } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 export function SubscriptionCard({
   title,
   imageUrl,
@@ -31,16 +32,18 @@ export function SubscriptionCard({
   const { updateSubscription } = useNextPaymentStore();
   return (
     <div
-      className="flex flex-col justify-center w-[350px] h-[210px] p-3 bg-white shadow-md rounded-md"
+      className="flex flex-col justify-center w-full h-[210px] p-3 bg-white shadow-md rounded-md text-sm sm:text-base"
       onClick={() => {
         updateSubscription({
-          title,
-          imageUrl,
-          remainingDays,
-          startingDate,
-          endingDate,
-          subscriptionCategory,
-          subscriptionPrice,
+          SubscriptionTitle: title,
+          subscriptionLogoUrl: imageUrl,
+          subscriptionCategory: subscriptionCategory,
+          remainingDays: remainingDays,
+          startingDate: startingDate,
+          endingDate: endingDate,
+          subscriptionPrice: subscriptionPrice,
+          subscriptionType: "",
+          paymentsHistory: [],
         });
       }}
     >
@@ -227,9 +230,15 @@ export function BarChartCard({ total }: { total: number | null }) {
 }
 
 export function SubscriptionDetailsCard() {
-  const { subscription } = useNextPaymentStore();
+  const { subscription, updateSubscription } = useNextPaymentStore();
   return (
-    <div className="bg-white shadow-md rounded-md w-[370px] h-[80vh] p-3 flex flex-col justify-between text-gray-500">
+    <div className="bg-white shadow-md rounded-md w-[370px] h-[80vh] p-3 flex flex-col justify-between text-gray-500 relative">
+      <button
+        onClick={() => { updateSubscription(initialState) }}
+        className="absolute right-0 -top-5 bg-white h-8 w-8 bg-transparent rounded-md flex items-center justify-center"
+      >
+        <X size={16} color="black" />
+      </button>
       <div className="flex justify-between bg-gray-100 h-[80px] rounded-md px-6  items-center">
         <div className="flex space-x-5">
           <Image

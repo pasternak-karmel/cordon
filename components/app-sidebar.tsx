@@ -1,28 +1,19 @@
 "use client";
 
 import {
-  Activity,
   BarChart,
   Bell,
   Bookmark,
-  BookOpen,
   Command,
   CreditCard,
-  FileText,
-  HeadphonesIcon,
-  HelpCircle,
   LayoutGrid,
   LifeBuoy,
   Lightbulb,
   Link,
   Send,
-  Settings,
-  Shield,
   Sparkles,
   Telescope,
   TrendingUp,
-  User,
-  Users,
 } from "lucide-react";
 import * as React from "react";
 
@@ -52,58 +43,58 @@ const data = {
       icon: LayoutGrid,
       isActive: true,
       items: [],
-    },{
+    },
+    {
       title: "Connected Accounts & Integrations",
       url: "/connected-accounts",
       icon: Link,
-      isActive: true,
       items: [],
     },
     // profil
-    {
-      title: "Profile",
-      url: "#",
-      icon: Bookmark,
-      items: [
-        {
-          title: "Personal Information",
-          url: "#",
-          icon: User,
-        },
-        {
-          title: "Account Settings",
-          url: "#",
-          icon: Settings,
-        },
-        {
-          title: "Subscription & Billing",
-          url: "#",
-          icon: CreditCard,
-        },
-        {
-          title: "Notifications & Preferences",
-          url: "#",
-          icon: Bell,
-        },
-        {
-          title: "Security & Privacy",
-          url: "#",
-          icon: Shield,
-        },
-        {
-          title: "Support & Help",
-          url: "#",
-          icon: HelpCircle,
-        },
-      ],
-    },
+    // {
+    //   title: "Profile",
+    //   url: "#",
+    //   icon: Bookmark,
+    //   items: [
+    //     {
+    //       title: "Personal Information",
+    //       url: "#",
+    //       icon: User,
+    //     },
+    //     {
+    //       title: "Account Settings",
+    //       url: "#",
+    //       icon: Settings,
+    //     },
+    //     {
+    //       title: "Subscription & Billing",
+    //       url: "#",
+    //       icon: CreditCard,
+    //     },
+    //     {
+    //       title: "Notifications & Preferences",
+    //       url: "#",
+    //       icon: Bell,
+    //     },
+    //     {
+    //       title: "Security & Privacy",
+    //       url: "#",
+    //       icon: Shield,
+    //     },
+    //     {
+    //       title: "Support & Help",
+    //       url: "#",
+    //       icon: HelpCircle,
+    //     },
+    //   ],
+    // },
     //support
     {
       title: "Support",
       url: "#",
       icon: Telescope,
       items: [
-        {
+        ,/*{
           title: "Help Center & Documentation",
           url: "#",
           icon: BookOpen,
@@ -127,10 +118,22 @@ const data = {
           title: "Legal & Policies",
           url: "#",
           icon: FileText,
-        },
+        }*/
       ],
     },
     // insights
+    {
+      title: "Profile",
+      url: "profile",
+      icon: Bookmark,
+    },
+    {
+      title: "Pricing",
+      url: "pricing",
+      icon: LayoutGrid,
+      isActive: true,
+      items: [],
+    },
     {
       title: "Insights",
       url: "#",
