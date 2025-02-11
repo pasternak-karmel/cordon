@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 
-export function EmptyPage() {
+export function EmptyPage({}) {
   return (
       <div className='flex flex-col justify-around items-center bg-white shadow-md rounded-xl h-full'>
 

@@ -86,3 +86,9 @@ export interface subscriptionDetailProps {
   subscriptionType: string;
   paymentsHistory: { paymentDate: string; paymentCategory: string }[];
 }
+
+export interface SubscriptionStore {
+  subscription: subscriptionDetailProps;
+  updateSubscription: (data: subscriptionDetailProps) => void;
+}
+
