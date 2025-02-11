@@ -3,25 +3,15 @@
 import { RecentSubscriptions } from "@/app/_components/cards";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { trpc } from "@/trpc/client";
-import { Loader } from "lucide-react";
+import { RecentSubscriptionSkeleton } from "./skeleton";
 // import { useIntl } from "react-intl";
 
 const RecentSubscription = () => {
-  //   const { data: subscription, isLoading } = useQuery({
-  //     queryKey: ["userSubscription"],
-  //     queryFn: userSub,
-  //   });
-  //   const { formatNumber, formatDate } = useIntl();
-
   const { data: subscription, isLoading } =
     trpc.getUserSubscriptions.useQuery();
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-20">
-        <Loader className="h-5 w-5 animate-spin text-blue-500" />
-      </div>
-    );
+    return <RecentSubscriptionSkeleton />;
   }
 
   return (
