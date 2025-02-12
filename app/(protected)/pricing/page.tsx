@@ -11,39 +11,38 @@ export default function PricingPage() {
       isPerMonth: true,
       description: "Perfect for individuals and small teams getting started",
       features: [
-        "Unlimited events",
-        "Unlimited attendees",
-        "Unlimited tickets",
-        "Unlimited organizers",
+        "Add up to 3 account",
+        "Manage subscription",
+        "Support service",
       ],
     },
     {
       title: "Pro",
-      price: 99,
+      price: 4.9,
       isPopular: true,
       isPerMonth: true,
       description: "Great for growing businesses and professional events",
       features: [
-        "Unlimited sessions",
-        "Unlimited speakers",
-        "Unlimited sponsors",
-        "Unlimited exhibitors",
+        "Add Unlimited Account ",
+        "Track subscription",
+        "Benefits suggestion",
+        "Support Service",
       ],
     },
     {
       title: "Enterprise",
-      price: 499,
+      price: 19.99,
       isPopular: false,
       isPerMonth: true,
       description: "Advanced features for large organizations",
       features: [
-        "Unlimited booths",
-        "Unlimited networking",
-        "Unlimited chat",
-        "Unlimited polls",
+        "Take action directly ",
+        "Setup automation for account",
+        "Cancel any subscription at any time directly",
+        "Have privilege",
       ],
     },
-  ];
+  ] as const;
   const annualBilling = [
     {
       title: "Free",
@@ -95,20 +94,16 @@ export default function PricingPage() {
           Simple, transparent pricing
         </h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Choose the perfect plan for your needs. All plans include 14-day free trial.
+          Choose the perfect plan for your needs. All plans include 14-day free
+          trial.
         </p>
       </div>
 
       <div className="mb-8 flex items-center justify-center gap-4">
-        <Tabs
-          defaultValue="monthly"
-          className="w-full"
-        >
+        <Tabs defaultValue="monthly" className="w-full">
           <div className="flex flex-col items-center gap-4">
             <TabsList className="grid w-[400px] grid-cols-2">
-              <TabsTrigger value="monthly">
-                Monthly billing
-              </TabsTrigger>
+              <TabsTrigger value="monthly">Monthly billing</TabsTrigger>
               <TabsTrigger value="annual">
                 Annual billing
                 <span className="ml-2 rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-semibold text-green-600">
@@ -127,6 +122,7 @@ export default function PricingPage() {
         </Tabs>
       </div>
 
+      {/*  a refaire inh */}
       <div className="mt-16 border-t pt-8">
         <div className="text-center mb-8">
           <h2 className="text-2xl font-bold">Frequently Asked Questions</h2>
@@ -160,7 +156,13 @@ const PricingSection = ({ billingCards }: PricingSectionProps) => {
   );
 };
 
-const FAQCard = ({ question, answer }: { question: string; answer: string }) => {
+const FAQCard = ({
+  question,
+  answer,
+}: {
+  question: string;
+  answer: string;
+}) => {
   return (
     <div className="rounded-lg border p-6 shadow-sm">
       <h3 className="font-semibold mb-2">{question}</h3>

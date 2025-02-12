@@ -1,4 +1,4 @@
-"use server";
+import "server-only";
 
 import { getUser } from "@/data/account";
 import { transactionProps } from "@/interface";

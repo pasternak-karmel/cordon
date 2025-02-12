@@ -64,14 +64,14 @@ export interface transactionProps {
   finAbonnement: string;
 }
 
-export interface PricingCardProps  {
+export interface PricingCardProps {
   title: string;
   price: number;
   features: string[];
   isPopular: boolean;
   isPerMonth: boolean;
   description: string;
-};
+}
 
 export interface PricingSectionProps {
   billingCards: PricingCardProps[];
@@ -93,3 +93,17 @@ export interface SubscriptionStore {
   updateSubscription: (data: subscriptionDetailProps) => void;
 }
 
+export interface userRequistionProps {
+  id: string;
+  created: string;
+  redirect: string;
+  status: string;
+  institution_id: string;
+  agreement: string;
+  reference: string;
+  accounts: string[];
+  link: string;
+  ssn: string | null;
+  account_selection: boolean;
+  redirect_immediate: boolean;
+}

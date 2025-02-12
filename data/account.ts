@@ -1,4 +1,5 @@
 import { eq } from "drizzle-orm";
+import "server-only";
 
 import { auth } from "@/auth";
 import { db, users } from "@/db/schema";

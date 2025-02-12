@@ -2,7 +2,6 @@
 import { BarChartCard, PieChartCard } from "@/app/_components/cards";
 import { trpc } from "@/trpc/client";
 import EmptySubscription from "./components/emptySubscription";
-import NextPayment from "./components/nextPayment";
 import RecentSubscription from "./components/recentSubscription";
 
 export default function Dashboard() {
@@ -28,7 +27,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <NextPayment />
+        {/* <NextPayment /> */}
         <RecentSubscription />
       </div>
     );

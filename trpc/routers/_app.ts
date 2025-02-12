@@ -13,12 +13,10 @@ export const appRouter = createTRPCRouter({
     return subscriptions;
   }),
   getRecentSubscription: protectedProcedure.query(async () => {
-    const subscriptions = await getRecentSubscription();
-    return subscriptions;
+    return await getRecentSubscription();
   }),
   canAddAccount: protectedProcedure.query(async () => {
-    const canAdd = await canAddAccount();
-    return canAdd;
+    return await canAddAccount();
   }),
   hasLinkedAccount: protectedProcedure.query(async () => {
     return await hasLinkedAccount();
@@ -28,7 +26,6 @@ export const appRouter = createTRPCRouter({
     if (!email) {
       throw new TRPCError({ code: "UNAUTHORIZED", message: "Unauthorized" });
     }
-
     return await getConnectedAccounts(email);
   }),
 });
