@@ -1,19 +1,19 @@
-import dotenv from "dotenv";
+import * as dotenv from "dotenv";
 import { defineConfig } from "drizzle-kit";
-import { urlDb } from "./env";
+import path from "path";
 
-dotenv.config();
+// Load .env file from project root
+dotenv.config({ path: path.resolve(__dirname, ".env") });
+
+// Log for debugging
+console.log("Database URL:", process.env.DATABASE_URL);
 
 export default defineConfig({
   dialect: "postgresql",
   schema: "db/schema.ts",
   out: "./drizzle",
   dbCredentials: {
-    // url: process.env.DATABASE_URL!,
-
-    url: "postgres://postgres:moikarmel@127.0.0.1:5432/cordon",
-    // url: urlDb,
-    //postgres:"//postgres:23052005AB@127.0.0.1:5432/cordon",
+    url: process.env.DATABASE_URL ? process.env.DATABASE_URL : "",
   },
   verbose: true,
   strict: true,

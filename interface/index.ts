@@ -53,6 +53,8 @@ export interface RequisitionTableProps {
 }
 
 export interface transactionProps {
+  SubscriptionTitle: string;
+  subscriptionPrice: number;
   transactionId: string;
   bookingDate: string;
   transactionAmount: {
@@ -64,14 +66,14 @@ export interface transactionProps {
   finAbonnement: string;
 }
 
-export interface PricingCardProps  {
+export interface PricingCardProps {
   title: string;
   price: number;
   features: string[];
   isPopular: boolean;
   isPerMonth: boolean;
   description: string;
-};
+}
 
 export interface PricingSectionProps {
   billingCards: PricingCardProps[];
@@ -93,3 +95,12 @@ export interface SubscriptionStore {
   updateSubscription: (data: subscriptionDetailProps) => void;
 }
 
+export interface ChartData {
+  name: string;
+  total: number;
+}
+
+export interface BarChartProps {
+  data: ChartData[];
+  total: number;
+}

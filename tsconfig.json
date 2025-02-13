@@ -28,6 +28,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/api/nordigen/route.js"
-  ],
+, "env.ts"  ],
   "exclude": ["node_modules"]
 }

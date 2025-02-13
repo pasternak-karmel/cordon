@@ -1,8 +1,11 @@
+"use client"
 import React from 'react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
+import { useRouter } from 'next/navigation'
 
-export function EmptyPage({}) {
+export function EmptyPage({ }) {
+  const router = useRouter()
   return (
       <div className='flex flex-col justify-around items-center bg-white shadow-md rounded-xl h-full'>
 
@@ -10,7 +13,7 @@ export function EmptyPage({}) {
       <h6 className='text-xl'>
         No account linked. Please link an account to continue
       </h6>
-      <Button>Link an account</Button>
+      <Button onClick={()=>{router.push("/account")}}>Link an account</Button>
     </div>
   )
 }
