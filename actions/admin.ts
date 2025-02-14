@@ -1,4 +1,4 @@
-"use server";
+import "server-only";
 
 import { getUser, getUserByEmail, getUserById } from "@/data/account";
 import {

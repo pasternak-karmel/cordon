@@ -1,23 +1,15 @@
 "use client";
-import { getRecentSubscription } from "@/actions/estimate";
 import { SubscriptionCard } from "@/app/_components/cards";
 import { ScrollBar } from "@/components/ui/scroll-area";
+import { trpc } from "@/trpc/client";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
-import { useQuery } from "@tanstack/react-query";
-import { Loader } from "lucide-react";
+import { NextPaymentSkeleton } from "./skeleton";
 
 const NextPayment = () => {
-  const { data: payment, isLoading } = useQuery({
-    queryKey: ["nextPayment"],
-    queryFn: getRecentSubscription,
-  });
+  const { data: payment, isLoading } = trpc.getRecentSubscription.useQuery();
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-20">
-        <Loader className="h-5 w-5 animate-spin" />
-      </div>
-    );
+    return <NextPaymentSkeleton />;
   }
 
   return (

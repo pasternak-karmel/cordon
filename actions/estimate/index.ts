@@ -1,4 +1,5 @@
-"use server";
+import "server-only";
+// "use server";
 
 import { transactionProps } from "@/interface";
 import { userSub } from "../calcule";

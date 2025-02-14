@@ -94,6 +94,20 @@ export interface SubscriptionStore {
   subscription: subscriptionDetailProps;
   updateSubscription: (data: subscriptionDetailProps) => void;
 }
+export interface userRequistionProps {
+  id: string;
+  created: string;
+  redirect: string;
+  status: string;
+  institution_id: string;
+  agreement: string;
+  reference: string;
+  accounts: string[];
+  link: string;
+  ssn: string | null;
+  account_selection: boolean;
+  redirect_immediate: boolean;
+}
 
 export interface ChartData {
   name: string;

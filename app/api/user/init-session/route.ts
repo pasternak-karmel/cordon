@@ -37,3 +37,4 @@ export async function GET(request: Request) {
   console.log(values);
   return NextResponse.json({ values });
 }
+

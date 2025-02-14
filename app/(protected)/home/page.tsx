@@ -24,8 +24,8 @@ export default function Dashboard() {
   else
     return (
       <div className="px-4 sm:px-6 pt-8 h-fit">
+        {/*  mets ceci en composant */}
         <h5 className="my-3 text-gray-800 text-xl">Spendings</h5>
-
         {/* Charts Section */}
         <ChartsSection subscriptions={sub.subscription} total={sub.total ? sub.total : 0} />
 
