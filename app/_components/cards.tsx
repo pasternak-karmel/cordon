@@ -1,5 +1,4 @@
 "use client";
-import { BarChartComponent } from "@/app/_components/chartComponent";
 import { PieChartComponent } from "@/app/_components/piechart";
 import { Button } from "@/components/ui/button";
 import {
@@ -220,13 +219,7 @@ export function PieChartCard() {
   );
 }
 
-export function BarChartCard({ total }: { total: number | null }) {
-  return (
-    <div className="h-full">
-      <BarChartComponent total={total} />
-    </div>
-  );
-}
+
 
 export function SubscriptionDetailsCard() {
   const { subscription, updateSubscription } = useNextPaymentStore();

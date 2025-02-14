@@ -53,6 +53,8 @@ export interface RequisitionTableProps {
 }
 
 export interface transactionProps {
+  SubscriptionTitle: string;
+  subscriptionPrice: number;
   transactionId: string;
   bookingDate: string;
   transactionAmount: {
@@ -92,7 +94,6 @@ export interface SubscriptionStore {
   subscription: subscriptionDetailProps;
   updateSubscription: (data: subscriptionDetailProps) => void;
 }
-
 export interface userRequistionProps {
   id: string;
   created: string;
@@ -106,4 +107,14 @@ export interface userRequistionProps {
   ssn: string | null;
   account_selection: boolean;
   redirect_immediate: boolean;
+}
+
+export interface ChartData {
+  name: string;
+  total: number;
+}
+
+export interface BarChartProps {
+  data: ChartData[];
+  total: number;
 }
