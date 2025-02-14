@@ -38,3 +38,15 @@ export const getUser = async () => {
 
   return user.id;
 };
+
+export const getUserStripeCustomerId = async () => {
+  try {
+    const session = await auth();
+    if (!session || !session.user || !session.user.email) return null;
+    const id = await getUserByEmail(session.user.email);
+    if (!id) return null;
+    return id.stripe_customer_id;
+  } catch {
+    return null;
+  }
+};

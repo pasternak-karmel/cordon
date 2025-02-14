@@ -61,7 +61,7 @@ export interface transactionProps {
   };
   debtorName: string;
   additionalInformation: string;
-  finAbonnement: string;
+  finAbonnement: string | null;
 }
 
 export interface PricingCardProps {

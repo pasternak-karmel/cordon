@@ -28,7 +28,7 @@ const RecentSubscription = () => {
                 title={sub.debtorName || "Unknown Service"}
                 SubscriptionImage={"/netflix.jpg"}
                 endingDate={
-                  sub.finAbonnement
+                  sub.finAbonnement ?? "No end date"
                   // ? formatDate(new Date(sub.finAbonnement), {
                   //     year: "numeric",
                   //     month: "long",

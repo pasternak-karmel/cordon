@@ -37,6 +37,7 @@ export const users = pgTable("user", {
   email: text("email").unique(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
+  stripe_customer_id: text("stripe_customer_id"),
 });
 
 export const accounts = pgTable(
@@ -138,9 +139,11 @@ export const RequisitionTable = pgTable(
 
 export const prices = pgTable("prices", {
   id: text("id").primaryKey().$defaultFn(generate),
+  stripe_id: text("stripe_id").notNull(),
   name: text("name"),
-  price: integer("price").notNull(),
+  amount: integer("amount").notNull(),
   currency: text("currency").notNull(),
+  interval: text("interval").notNull(),
 });
 
 export enum SubscriptionStatus {

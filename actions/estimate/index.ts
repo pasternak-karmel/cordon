@@ -35,7 +35,8 @@ export const calculateEndSubscriptions = async (startDate: string) => {
 
   if (start < today) {
     // throw new Error("The subscription start date is older than today.");
-    console.warn("The subscription start date is older than today.");
+    // console.warn("The subscription start date is older than today.");
+    return null;
   }
 
   const next = new Date(start);
@@ -57,6 +58,8 @@ export const getRecentSubscription = async (): Promise<transactionProps[]> => {
   return userSubscription.subscription.filter(
     (subscription) =>
       subscription.bookingDate >= start.toISOString() &&
-      subscription.finAbonnement <= end.toISOString()
+      (subscription.finAbonnement
+        ? subscription.finAbonnement >= end.toISOString()
+        : true)
   );
 };

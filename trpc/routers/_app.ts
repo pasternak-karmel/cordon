@@ -9,8 +9,7 @@ import { TRPCError } from "@trpc/server";
 import { createTRPCRouter, protectedProcedure } from "../init";
 export const appRouter = createTRPCRouter({
   getUserSubscriptions: protectedProcedure.query(async () => {
-    const subscriptions = await userSub();
-    return subscriptions;
+    return await userSub();
   }),
   getRecentSubscription: protectedProcedure.query(async () => {
     return await getRecentSubscription();

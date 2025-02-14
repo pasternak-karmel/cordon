@@ -64,6 +64,20 @@
       "when": 1739355503090,
       "tag": "0008_overrated_arachne",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1739487165192,
+      "tag": "0009_elite_pandemic",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1739488886971,
+      "tag": "0010_happy_wildside",
+      "breakpoints": true
     }
   ]
 }

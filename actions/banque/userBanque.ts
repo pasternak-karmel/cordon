@@ -37,6 +37,8 @@ export const getAccountDetails = async (id: string) => {
 export const getAccountTransactions = async (id: string) => {
   try {
     const response = await apiAxios.get(`/v2/accounts/${id}/transactions/`);
+    // console.log("this is the response", response.data.transactions.booked);
+
     return response.data;
   } catch (error) {
     console.error("Error fetching account transactions:", error);
