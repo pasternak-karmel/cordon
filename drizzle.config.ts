@@ -3,7 +3,7 @@ import { defineConfig } from "drizzle-kit";
 import path from "path";
 
 // Load .env file from project root
-dotenv.config({ path: path.resolve(__dirname, ".env") });
+dotenv.config({ path: path.resolve(__dirname, ".env.local") });
 
 // Log for debugging
 console.log("Database URL:", process.env.DATABASE_URL);
@@ -14,6 +14,7 @@ export default defineConfig({
   out: "./drizzle",
   dbCredentials: {
     url: process.env.DATABASE_URL ? process.env.DATABASE_URL : "",
+    // url: urlDb ? urlDb : "",
   },
   verbose: true,
   strict: true,

@@ -15,7 +15,9 @@ import type { AdapterAccountType } from "next-auth/adapters";
 import postgres from "postgres";
 // DATABASE_URL=postgres://postgres:23052005AB@127.0.0.1:5432/cordon
 
-const pool = postgres(urlDb, { max: 1 });
+const pool = postgres(urlDb!, { max: 1 });
+
+console.log("the urlDb is", urlDb);
 
 export const db = drizzle(pool);
 

@@ -3,11 +3,12 @@ import { BarChartComponent } from "@/app/_components/chartComponent";
 import { ChartData, transactionProps } from "@/interface";
 
 export default function ChartsSection({
-  subscriptions, total
+  subscriptions,
+  total,
 }: {
-  subscriptions: transactionProps[] | null; total : number
+  subscriptions: transactionProps[] | null;
+  total: number;
 }) {
-
   // Process subscription data for the chart
   const chartData = subscriptions?.map((sub) => ({
     name: sub.SubscriptionTitle,
@@ -17,7 +18,10 @@ export default function ChartsSection({
   return (
     <div className="w-full flex flex-col lg:flex-row gap-4">
       <div className="w-full lg:w-[450px] h-full">
-        <BarChartComponent data={(chartData as ChartData[]) } total={total ? total : 0} />
+        <BarChartComponent
+          data={chartData as ChartData[]}
+          total={total ? total : 0}
+        />
       </div>
       <div className="w-full lg:w-[300px] flex flex-col sm:flex-row lg:flex-col gap-4 lg:space-y-2">
         <div className="w-full">

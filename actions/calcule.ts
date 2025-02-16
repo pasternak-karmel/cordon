@@ -3,6 +3,8 @@ import "server-only";
 import { getUser } from "@/data/account";
 import { db, RequisitionTable } from "@/db/schema";
 import { transactionProps } from "@/interface";
+import { getCachedData, setCachedData } from "@/utils/redis";
+import { TRPCError } from "@trpc/server";
 import { eq } from "drizzle-orm";
 import { canAddAccount } from "./admin";
 import { getAccountTransactions } from "./banque/userBanque";
@@ -16,50 +18,62 @@ export const userSub = async (): Promise<{
   subscription: transactionProps[];
   total: number | null;
 }> => {
-  const id = await getUser();
-  if (!id) return { subscription: [], total: null };
+  const userId = await getUser();
+  if (!userId) return { subscription: [], total: null };
 
-  const userReq = await getUserRequistion();
-  if (!userReq.length) return { subscription: [], total: null };
+  const cacheKey = `userSub:${userId}`;
+  const cachedData = await getCachedData<{
+    subscription: transactionProps[];
+    total: number | null;
+  }>(cacheKey);
+  if (cachedData) return cachedData;
 
+  try {
+    const userReq = await getUserRequistion();
+    if (!userReq.length) return { subscription: [], total: null };
+
+    const transactions = await fetchTransactions(userReq);
+    const totalSpendings = await calculateSpendings(transactions);
+
+    const result = { subscription: transactions, total: totalSpendings };
+    await setCachedData(cacheKey, result);
+
+    return result;
+  } catch (error) {
+    console.error("Error fetching user subscriptions:", error);
+    throw new TRPCError({
+      code: "INTERNAL_SERVER_ERROR",
+      message: "Failed to fetch subscriptions",
+    });
+  }
+};
+
+/**
+ * Fetches transactions for all user requisitions.
+ * @param userReq - Array of user requisitions.
+ * @returns {Promise<transactionProps[]>}
+ */
+const fetchTransactions = async (
+  userReq: { id: string; status: boolean }[]
+): Promise<transactionProps[]> => {
   const transactionPromises = userReq.map(async (element) => {
     const transactionId = Array.isArray(element.id)
       ? element.id[0]
       : element.id;
-
-    console.log("transactionId", transactionId);
-
     const transac = await getAccountTransactions(transactionId);
-    console.log(
-      "this is in getAccountTransactions",
-      JSON.stringify(transac.data, null, 2)
-    );
-    if (!transac || !transac.transactions || !transac.transactions.booked)
-      return [];
 
-    // console.table(transac.transactions.booked);
-    // console.log("1");
-    // console.dir(transac.booked, { depth: null });
-    // console.log("2");
-    // console.log(JSON.stringify(transac.transactions.booked, null, 2));
+    if (!transac?.transactions?.booked) return [];
 
-    return Promise.all(
-      transac.booked.map(async (e: transactionProps) => {
-        e.finAbonnement = SubscriptionService.calculateEndDate(e.bookingDate, {
-          plan: SubscriptionPlan.MONTHLY,
-        });
-        return e;
-      })
-    );
+    return transac.booked.map((e: transactionProps) => ({
+      ...e,
+      finAbonnement: SubscriptionService.calculateEndDate(e.bookingDate, {
+        plan: SubscriptionPlan.MONTHLY,
+      }),
+    }));
   });
 
-  const allTransac = (await Promise.all(transactionPromises)).flat();
-
-  const totalSpendings = await calculateSpendings(allTransac);
-
-  // should check if the user has a subscription more than basic to call gemini I guess
-
-  return { subscription: allTransac, total: totalSpendings };
+  const allTransactions = await Promise.all(transactionPromises);
+  return allTransactions.flat();
 };
 
 const getUserRequistion = async (): Promise<
