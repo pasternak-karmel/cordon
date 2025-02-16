@@ -1,9 +1,10 @@
 import "server-only";
 
 import { getUser } from "@/data/account";
-import { db, RequisitionTable } from "@/db/schema";
+import { db } from "@/db";
+import { RequisitionTable } from "@/db/schema";
 import { transactionProps } from "@/interface";
-import { getCachedData, setCachedData } from "@/utils/redis";
+import RedisCacheService from "@/utils/redis";
 import { TRPCError } from "@trpc/server";
 import { eq } from "drizzle-orm";
 import { canAddAccount } from "./admin";
@@ -22,7 +23,7 @@ export const userSub = async (): Promise<{
   if (!userId) return { subscription: [], total: null };
 
   const cacheKey = `userSub:${userId}`;
-  const cachedData = await getCachedData<{
+  const cachedData = await RedisCacheService.getCachedData<{
     subscription: transactionProps[];
     total: number | null;
   }>(cacheKey);
@@ -36,7 +37,7 @@ export const userSub = async (): Promise<{
     const totalSpendings = await calculateSpendings(transactions);
 
     const result = { subscription: transactions, total: totalSpendings };
-    await setCachedData(cacheKey, result);
+    await RedisCacheService.setCachedData(cacheKey, result);
 
     return result;
   } catch (error) {

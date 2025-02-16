@@ -1,4 +1,13 @@
-// import "dotenv/config";
-// import { drizzle } from "drizzle-orm/node-postgres";
+import { urlDb } from "@/env";
+import "dotenv/config";
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
+import "server-only";
 
-// export const db = drizzle(process.env.DATABASE_URL!);
+if (!urlDb) {
+  throw new Error("❌ DATABASE_URL is not set in environment variables");
+}
+
+const pool = postgres(urlDb, { max: 1 });
+
+export const db = drizzle(pool);

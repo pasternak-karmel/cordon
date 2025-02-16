@@ -5,7 +5,8 @@
 
 import { auth } from "@/auth";
 import { getUserByEmail } from "@/data/account";
-import { db, RequisitionTable } from "@/db/schema";
+import { db } from "@/db";
+import { RequisitionTable } from "@/db/schema";
 import { userRequistionProps } from "@/interface";
 import { getOneRequisition } from "../banque/userBanque";
 

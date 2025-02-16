@@ -1,4 +1,5 @@
-import { db, users } from "@/db/schema";
+import { db } from "@/db";
+import { users } from "@/db/schema";
 import "server-only";
 
 export const setStripeCustomerId = async (id: string) => {

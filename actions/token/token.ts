@@ -2,7 +2,8 @@
 
 import { desc, eq } from "drizzle-orm";
 
-import { db, token } from "@/db/schema";
+import { db } from "@/db";
+import { token } from "@/db/schema";
 import { TokenData } from "@/interface";
 
 // TOKEN

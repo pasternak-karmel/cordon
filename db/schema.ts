@@ -1,4 +1,4 @@
-import { urlDb } from "@/env";
+// import { urlDb } from "@/env";
 import {
   boolean,
   index,
@@ -10,16 +10,20 @@ import {
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
-import { drizzle } from "drizzle-orm/postgres-js";
+// import { drizzle } from "drizzle-orm/postgres-js";
 import type { AdapterAccountType } from "next-auth/adapters";
-import postgres from "postgres";
+// import postgres from "postgres";
 // DATABASE_URL=postgres://postgres:23052005AB@127.0.0.1:5432/cordon
 
-const pool = postgres(urlDb!, { max: 1 });
+// if (!urlDb) {
+//   throw new Error("❌ DATABASE_URL is not set in environment variables");
+// }
 
-console.log("the urlDb is", urlDb);
+// const pool = postgres(urlDb, { max: 1, ssl: "require" });
 
-export const db = drizzle(pool);
+// console.log("the urlDb is", urlDb);
+
+// export const db = drizzle(pool);
 
 function generate() {
   return crypto.randomUUID();

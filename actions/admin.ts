@@ -1,8 +1,8 @@
 import "server-only";
 
 import { getUser, getUserByEmail, getUserById } from "@/data/account";
+import { db } from "@/db";
 import {
-  db,
   RequisitionTable,
   subscriptions,
   SubscriptionStatus,
