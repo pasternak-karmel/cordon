@@ -11,6 +11,19 @@ class RedisClient {
     if (!this.instance) {
       this.instance = createClient({
         password: config.redis.password,
+        socket: {
+          connectTimeout: 10000,
+          reconnectStrategy: function (retries) {
+            if (retries > 10) {
+              console.log(
+                "Too many attempts to reconnect. Redis connection was terminated"
+              );
+              return new Error("Too many retries.");
+            } else {
+              return retries * 500;
+            }
+          },
+        },
       });
 
       this.instance.on("error", (err) => {
