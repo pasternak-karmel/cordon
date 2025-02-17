@@ -20,6 +20,7 @@ export const appRouter = createTRPCRouter({
   hasLinkedAccount: protectedProcedure.query(async () => {
     return await hasLinkedAccount();
   }),
+  
   getConnectedAccounts: protectedProcedure.query(async ({ ctx }) => {
     const email = ctx.session.user.email;
     if (!email) {

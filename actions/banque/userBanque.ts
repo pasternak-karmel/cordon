@@ -1,13 +1,22 @@
 "use server";
 
 import { apiAxios } from "@/feature";
+import RedisCacheService from "@/utils/redis";
 import axios from "axios";
 
 // accounts
 export const getAccount = async (id: string) => {
   try {
-    const response = await apiAxios.get(`/v2/accounts/${id}/`);
-    return response.data;
+    const account = await RedisCacheService.getCachedData("userBankaccounts");
+    if (!account) {
+      const response = await apiAxios.get(`/v2/accounts/${id}/`);
+      await RedisCacheService.setCachedData(
+        "userBankaccounts",
+        JSON.stringify(response.data)
+      );
+      return response.data;
+    }
+    return account;
   } catch (error) {
     console.error("Error fetching account:", error);
     throw error;
@@ -16,7 +25,13 @@ export const getAccount = async (id: string) => {
 
 export const getAccountBalance = async (id: string) => {
   try {
+    const accountBalance = await RedisCacheService.getCachedData(
+      "userAccountBalance"
+    );
+    if (accountBalance) return accountBalance;
+
     const response = await apiAxios.get(`/v2/accounts/${id}/balances/`);
+    await RedisCacheService.setCachedData("userAccountBalance", response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching account balance:", error);
@@ -26,7 +41,13 @@ export const getAccountBalance = async (id: string) => {
 
 export const getAccountDetails = async (id: string) => {
   try {
+    const accountDetails = await RedisCacheService.getCachedData(
+      "userAccountDetails"
+    );
+    if (accountDetails) return accountDetails;
+
     const response = await apiAxios.get(`/v2/accounts/${id}/details/`);
+    await RedisCacheService.setCachedData("userAccountDetails", response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching account details:", error);
@@ -36,7 +57,16 @@ export const getAccountDetails = async (id: string) => {
 
 export const getAccountTransactions = async (id: string) => {
   try {
+    const accountTransactions = await RedisCacheService.getCachedData(
+      "userAccountTransaction"
+    );
+    if (accountTransactions) return accountTransactions;
+
     const response = await apiAxios.get(`/v2/accounts/${id}/transactions/`);
+    await RedisCacheService.setCachedData(
+      "userAccountTransaction",
+      response.data
+    );
     // console.log("this is the response", response.data.transactions.booked);
 
     return response.data;
@@ -52,12 +82,18 @@ export const getAllAgriments = async (
   offset: number = 0
 ) => {
   try {
+    const allAgriments = await RedisCacheService.getCachedData(
+      "userAllAgriments"
+    );
+    if (allAgriments) return allAgriments;
+
     const response = await apiAxios.get(`/v2/agreements/enduser/`, {
       params: {
         limit,
         offset,
       },
     });
+    await RedisCacheService.setCachedData("userAllAgriments", response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching agreements:", error);
@@ -131,6 +167,11 @@ export const getInstitutions = async (
   ssn_verification_supported?: boolean
 ) => {
   try {
+    const institution = await RedisCacheService.getCachedData(
+      "userInstitutions"
+    );
+    if (institution) return institution;
+
     const response = await apiAxios.get("/v2/institutions/", {
       params: {
         country,
@@ -148,6 +189,7 @@ export const getInstitutions = async (
         ssn_verification_supported,
       },
     });
+    await RedisCacheService.setCachedData("userInstitutions", response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching institutions:", error);
@@ -172,6 +214,11 @@ export const getRequisitions = async (
   offset: number = 0
 ) => {
   try {
+    const requisitions = await RedisCacheService.getCachedData(
+      "userRedisRequisitions"
+    );
+    if (requisitions) return requisitions;
+
     const response = await apiAxios.get("/v2/requisitions/", {
       params: {
         limit,
@@ -187,9 +234,14 @@ export const getRequisitions = async (
 
 export const getOneRequisition = async (id: string) => {
   try {
+    const oneRequisition = await RedisCacheService.getCachedData(
+      "userOneRequisition"
+    );
+    if (oneRequisition) return oneRequisition;
     console.log(`Fetching requisition with ID: ${id}`);
     const response = await apiAxios.get(`/v2/requisitions/${id}/`);
     console.log("Requisition fetch successful");
+    await RedisCacheService.setCachedData("userOneRequisition", response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching requisition:", error);
@@ -258,7 +310,12 @@ export async function getAccountInfo(requisitionId: string) {
 
     const accountId = requisitionData.accounts[0];
     // const accountId = "4972f160-e90e-4f92-9ce2-7b18457eea17";
+    const accountInfo = await RedisCacheService.getCachedData(
+      "userAccountInfo"
+    );
+    if (accountInfo) return accountInfo;
     const accountDetails = await getAccountDetails(accountId);
+    await RedisCacheService.setCachedData("userAccountInfo", accountDetails);
 
     return accountDetails;
   } catch (error) {
