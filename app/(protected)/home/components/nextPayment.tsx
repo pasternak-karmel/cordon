@@ -27,7 +27,7 @@ const NextPayment = () => {
                     title={data.transactionId}
                     subscriptionCategory="abonnement"
                     startingDate={data.bookingDate}
-                    endingDate={data.finAbonnement}
+                    endingDate={data.finAbonnement || "could not find end date"}
                     remainingDays={15}
                     subscriptionPrice={data.transactionAmount.amount}
                     // on na pas image depuis l'api

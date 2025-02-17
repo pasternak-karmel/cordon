@@ -1,6 +1,5 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -52,7 +51,6 @@ export default function ConnectedAccounts() {
                     <TableHeader>
                       <TableRow>
                         <TableHead>Institution</TableHead>
-                        <TableHead>Status</TableHead>
                         <TableHead>Last Synced</TableHead>
                         <TableHead>Actions</TableHead>
                       </TableRow>
@@ -62,17 +60,6 @@ export default function ConnectedAccounts() {
                         <TableRow key={account.id} className="hover:bg-gray-50">
                           <TableCell className="font-medium">
                             {account.institutionName}
-                          </TableCell>
-                          <TableCell>
-                            <Badge
-                              variant={
-                                account.status_short === "ACTIVE"
-                                  ? "default"
-                                  : "destructive"
-                              }
-                            >
-                              {account.status_short}
-                            </Badge>
                           </TableCell>
                           <TableCell>
                             {account.lastSyncAt

@@ -12,7 +12,7 @@ export async function GET() {
       active: true,
       expand: ["data.product"],
     });
-    await RedisCacheService.setCachedData("prices", prices.data); // Cache for 1 minute (60 seconds)
+    await RedisCacheService.setCachedData("prices", prices.data);
 
     return new NextResponse(JSON.stringify(prices.data), { status: 200 });
   } catch (error) {
